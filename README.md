@@ -1,0 +1,1 @@
+Started working on Chess project. Initial skeleton done by Chris.
