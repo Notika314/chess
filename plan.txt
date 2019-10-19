@@ -45,6 +45,12 @@ class Piece(abstract class) {
 	}
 }
 
+
+classes for each type of piece: King, Queen, Pawn, Knight, Rook, Castle:
+
+class King extends Piece {
+	.............
+}
  -----------------------		------------------------------------		 -----------------------------------------------
 |	   Game             |	   |     		  Square 				|		|   		Piece (abstract class)				|
 ------------------------|	   |------------------------------------|		|-----------------------------------------------|
