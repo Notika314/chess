@@ -5,9 +5,10 @@ public class Rook extends Piece {
 	boolean hasMoved;
 	
 	public Rook(char color, int x, int y) {
-		this.color = color;
-		this.xPos = x;
-		this.yPos = y;
+		super(color,'R',x,y);
+//		this.color = color;
+//		this.xPos = x;
+//		this.yPos = y;
 	}
 	
 	public void generateValidMoves(Piece board[][]) {

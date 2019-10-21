@@ -14,7 +14,8 @@ public class Chess {
 	public static void main(String[] args) {
 		
 		//Base Point
-		
+		Game game = new Game();
+		game.printBoard();
 	}
 
 }

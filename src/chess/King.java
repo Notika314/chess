@@ -6,9 +6,10 @@ public class King extends Piece {
 	boolean hasMoved;
 	
 	public King(char color, int x, int y) {
-		this.color = color;
-		this.xPos = x;
-		this.yPos = y;
+		super(color,'K',x,y);
+//		this.color = color;
+//		this.xPos = x;
+//		this.yPos = y;
 	}
 	
 	public boolean move(Piece board[][], int x, int y, char color) {

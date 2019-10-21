@@ -3,9 +3,10 @@ package chess;
 public class Queen extends Piece {
 
 	public Queen(char color, int x, int y) {
-		this.color = color;
-		this.xPos = x;
-		this.yPos = y;
+		super(color,'Q',x,y);
+//		this.color = color;
+//		this.xPos = x;
+//		this.yPos = y;
 	}
 	
 	public void generateValidMoves(Piece board[][]) {

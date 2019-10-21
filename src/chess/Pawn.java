@@ -4,10 +4,11 @@ public class Pawn extends Piece {
 
 	boolean hasMoved;
 	
-	public Pawn(char color, int x, int y) {
-		this.color = color;
-		this.xPos = x;
-		this.yPos = y;
+	public Pawn(char color,int x, int y) {
+		super(color,'p',x,y);
+//		this.color = color;
+//		this.xPos = x;
+//		this.yPos = y;
 	}
 	
 	public void generateValidMoves(Piece board[][]) {
