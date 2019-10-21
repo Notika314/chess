@@ -9,8 +9,10 @@ public abstract class Piece {
 	char type;
 	boolean hasValidMove;
 	boolean validMoves[][];
-	public Piece(char color, char type,int x, int y){
+	public Piece(char color, char type,int x, int y ){
 		this.type = type;
+		this.xPos = x;
+		this.yPos = y;
 		this.color = color;
 		if (color=='w') code = "w";
 		else if (color=='b') code="b";
