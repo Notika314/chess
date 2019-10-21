@@ -2,7 +2,7 @@ package chess;
 
 public class Bishop extends Piece {
 
-	public Bishop(char color, int x, int y) {
+	public Bishop(int color, int x, int y) {
 		super(color,'B',x,y);
 //		this.color = color;
 //		this.xPos = x;

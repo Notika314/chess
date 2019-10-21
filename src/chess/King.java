@@ -5,7 +5,7 @@ public class King extends Piece {
 	boolean isInCheck;
 	boolean hasMoved;
 	
-	public King(char color, int x, int y) {
+	public King(int color, int x, int y) {
 		super(color,'K',x,y);
 //		this.color = color;
 //		this.xPos = x;

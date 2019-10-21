@@ -4,23 +4,23 @@ public class Pawn extends Piece {
 
 	boolean hasMoved;
 	
-	public Pawn(char color,int x, int y) {
+	public Pawn(int color,int x, int y) {
 		super(color,'p',x,y);
-//		this.color = color;
-//		this.xPos = x;
-//		this.yPos = y;
 	}
 	
 	public void generateValidMoves(Piece board[][]) {
-		
-		/* should we check that both squares in front are empty, or just second?*/
-		
-		if (hasMoved == false && board[this.xPos][this.yPos+2] == null) {
-			this.validMoves[this.xPos][this.yPos+2] = true;
+//		int nextStep=1;
+//		int nextNextStep = 2;
+//		if (this.color=='w') {
+//			nextStep=-1;
+//			nextNextStep=-2;
+//		}
+		if (hasMoved == false && board[this.xPos][this.yPos+1*this.color]==null && board[this.xPos][this.yPos+2*this.color] == null) {
+			this.validMoves[this.xPos][this.yPos+2*this.color] = true;
 			this.hasValidMove = true;
 		}
-		if (this.yPos + 1 < 8 && board[this.xPos][this.yPos+1] == null) {
-			this.validMoves[this.xPos][this.yPos+1] = true;
+		if (this.yPos + 1*this.color < 8 && board[this.xPos][this.yPos+1*this.color] == null) {
+			this.validMoves[this.xPos][this.yPos+1*this.color] = true;
 			this.hasValidMove = true;
 		}
 		

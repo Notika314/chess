@@ -4,7 +4,7 @@ public class Rook extends Piece {
 
 	boolean hasMoved;
 	
-	public Rook(char color, int x, int y) {
+	public Rook(int color, int x, int y) {
 		super(color,'R',x,y);
 //		this.color = color;
 //		this.xPos = x;

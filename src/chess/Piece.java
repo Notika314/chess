@@ -2,20 +2,20 @@ package chess;
 
 public abstract class Piece {
 
-	char color;
+	int color;
 	int xPos;
 	int yPos;
 	String code;
 	char type;
 	boolean hasValidMove;
 	boolean validMoves[][];
-	public Piece(char color, char type,int x, int y ){
+	public Piece(int color, char type,int x, int y ){
+		this.color = color;
 		this.type = type;
 		this.xPos = x;
 		this.yPos = y;
-		this.color = color;
-		if (color=='w') code = "w";
-		else if (color=='b') code="b";
+		if (color==1) code = "b";
+		else if (color== -1) code="w";
 		if (type=='p') code = code+"p";
 		if (type=='R') code = code +"R";
 		if (type=='N') code = code + "N";
@@ -24,7 +24,7 @@ public abstract class Piece {
 		if (type=='K') code+="K";
 	}
 
-	public boolean move(Piece board[][], int x, int y, char color) {
+	public boolean move(Piece board[][], int x, int y, int color) {
 		if (this.color != color) {
 			return false;
 		}
