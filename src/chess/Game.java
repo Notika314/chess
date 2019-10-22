@@ -29,6 +29,16 @@ public class Game {
 			board[1][i] = new Pawn(-1,1,i);
 			board[6][i] = new Pawn(1,6,i);
 		}
+		return;
+	}
+	public void updateValidMoves() {
+		int i,j;
+		for (i=0;i<8;i++) {
+			for (j=0;j<8;j++) {
+				if (board[i][j]!=null) board[i][j].generateValidMoves();
+			}
+		}
+		return;
 	}
 	public void printBoard() {
 		System.out.println();

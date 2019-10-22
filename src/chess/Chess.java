@@ -9,6 +9,10 @@ public class Chess {
 
 	private static Scanner scanner;
 	
+	/**
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		
 		String line;

@@ -23,7 +23,7 @@
 //	
 //}
 //
-//package chess;
+package chess;
 
 public class Pawn extends Piece {
 
@@ -32,6 +32,7 @@ public class Pawn extends Piece {
 	
 	public Pawn(int color, int x, int y) {
 		super(color,'P',x,y);
+		
 	}
 	
 	public void generateValidMoves(Piece board[][]) {
@@ -47,6 +48,11 @@ public class Pawn extends Piece {
 			this.hasValidMove = true;
 		}
 		//This should handle attacks
+		
+		// Question - do we check here if the piece on the position (x+1,y+1) is the enemy? 
+		// Because if it's not, the move shouldn't be valid
+		// Or do we make this check in Controller, before calling #move method on Pawn?
+		
 		if ((this.yPos+(1*this.color) < 8 && this.yPos+(1*this.color) >= 0) 
 				&& this.xPos+1 < 8 && board[this.xPos+1][this.yPos+(1*this.color)] != null) {
 			this.validMoves[this.xPos+1][this.yPos+(1*this.color)] = true;
@@ -58,12 +64,12 @@ public class Pawn extends Piece {
 			this.hasValidMove = true;
 		}
 		//I think this will handle en passant valid moves
-		if (this.xPos+1 < 8 && board[this.xPos+1][this.yPos].code.equals("P")
+		if (this.xPos+1 < 8 && board[this.xPos+1][this.yPos].type=='P'
 				&& ((Pawn)board[this.xPos+1][this.yPos]).passant == true) {
 			this.validMoves[this.xPos+1][this.yPos+(1*this.color)] = true;
 			this.hasValidMove = true;
 		}
-		if (this.xPos-1 >= 0 && board[this.xPos-1][this.yPos].code.equals("P")
+		if (this.xPos-1 >= 0 && board[this.xPos-1][this.yPos].type=='P'
 				&& ((Pawn)board[this.xPos-1][this.yPos]).passant == true) {
 			this.validMoves[this.xPos-1][this.yPos+(1*this.color)] = true;
 			this.hasValidMove = true;

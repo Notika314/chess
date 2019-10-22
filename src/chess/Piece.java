@@ -16,7 +16,7 @@ public abstract class Piece {
 		this.yPos = y;
 		if (color==1) code = "b";
 		else if (color== -1) code="w";
-		if (type=='p') code = code+"p";
+		if (type=='P') code = code+"p";
 		if (type=='R') code = code +"R";
 		if (type=='N') code = code + "N";
 		if (type=='B') code = code+"B";
