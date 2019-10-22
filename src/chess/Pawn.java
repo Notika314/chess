@@ -9,18 +9,12 @@ public class Pawn extends Piece {
 	}
 	
 	public void generateValidMoves(Piece board[][]) {
-//		int nextStep=1;
-//		int nextNextStep = 2;
-//		if (this.color=='w') {
-//			nextStep=-1;
-//			nextNextStep=-2;
-//		}
-		if (hasMoved == false && board[this.xPos][this.yPos+1*this.color]==null && board[this.xPos][this.yPos+2*this.color] == null) {
+		if (hasMoved == false && board[this.xPos][this.yPos+this.color]==null && board[this.xPos][this.yPos+2*this.color] == null) {
 			this.validMoves[this.xPos][this.yPos+2*this.color] = true;
 			this.hasValidMove = true;
 		}
-		if (this.yPos + 1*this.color < 8 && board[this.xPos][this.yPos+1*this.color] == null) {
-			this.validMoves[this.xPos][this.yPos+1*this.color] = true;
+		if (this.yPos + this.color < 8 && board[this.xPos][this.yPos+this.color] == null) {
+			this.validMoves[this.xPos][this.yPos+this.color] = true;
 			this.hasValidMove = true;
 		}
 		

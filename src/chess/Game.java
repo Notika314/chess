@@ -38,7 +38,7 @@ public class Game {
 					if (i%2==j%2) System.out.print("   ");
 					else System.out.print("## ");
 				} else {
-					System.out.print(board[i][j]); 
+					System.out.print(board[i][j]+" "); 
 				}
 			}
 			System.out.println(8-i);

@@ -4,9 +4,6 @@ public class Bishop extends Piece {
 
 	public Bishop(int color, int x, int y) {
 		super(color,'B',x,y);
-//		this.color = color;
-//		this.xPos = x;
-//		this.yPos = y;
 	}
 	
 	public void generateValidMoves(Piece board[][]) {

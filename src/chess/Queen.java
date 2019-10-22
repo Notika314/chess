@@ -4,9 +4,6 @@ public class Queen extends Piece {
 
 	public Queen(int color, int x, int y) {
 		super(color,'Q',x,y);
-//		this.color = color;
-//		this.xPos = x;
-//		this.yPos = y;
 	}
 	
 	public void generateValidMoves(Piece board[][]) {

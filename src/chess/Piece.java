@@ -45,7 +45,7 @@ public abstract class Piece {
 	}
 	
 	public String toString() {
-		return (code+" ");
+		return code;
 	}
 	
 }

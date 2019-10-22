@@ -6,9 +6,6 @@ public class Rook extends Piece {
 	
 	public Rook(int color, int x, int y) {
 		super(color,'R',x,y);
-//		this.color = color;
-//		this.xPos = x;
-//		this.yPos = y;
 	}
 	
 	public void generateValidMoves(Piece board[][]) {
