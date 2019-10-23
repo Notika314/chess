@@ -1,28 +1,3 @@
-//package chess;
-//
-//public class Pawn extends Piece {
-//
-//	boolean hasMoved;
-//	
-//	public Pawn(int color,int x, int y) {
-//		super(color,'P',x,y);
-//	}
-//	
-//	public void generateValidMoves(Piece board[][]) {
-//		if (hasMoved == false && board[this.xPos][this.yPos+this.color]==null && board[this.xPos][this.yPos+2*this.color] == null) {
-//			this.validMoves[this.xPos][this.yPos+2*this.color] = true;
-//			this.hasValidMove = true;
-//		}
-//		if (this.yPos + this.color < 8 && board[this.xPos][this.yPos+this.color] == null) {
-//			this.validMoves[this.xPos][this.yPos+this.color] = true;
-//			this.hasValidMove = true;
-//		}
-//		
-//		/* generate moves when pawn kills the enemy? */
-//	}
-//	
-//}
-//
 package chess;
 
 public class Pawn extends Piece {
@@ -30,8 +5,8 @@ public class Pawn extends Piece {
 	boolean hasMoved;
 	boolean passant;
 	
-	public Pawn(int color, int x, int y) {
-		super(color,'P',x,y);
+	public Pawn(int color, int xPos, int yPos) {
+		super(color,'P',xPos,yPos);
 		
 	}
 	
@@ -55,6 +30,7 @@ public class Pawn extends Piece {
 		
 		if ((this.yPos+(1*this.color) < 8 && this.yPos+(1*this.color) >= 0) 
 				&& this.xPos+1 < 8 && board[this.xPos+1][this.yPos+(1*this.color)] != null) {
+			System.out.println("xpos+1: "+(this.xPos+1)+", ypos+...: "+(this.yPos+(1*this.color)));
 			this.validMoves[this.xPos+1][this.yPos+(1*this.color)] = true;
 			this.hasValidMove = true;
 		}

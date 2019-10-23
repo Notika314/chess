@@ -1,7 +1,7 @@
 package chess;
 
 public abstract class Piece {
-
+	boolean hasMoved;
 	int color;
 	int xPos;
 	int yPos;
@@ -9,13 +9,14 @@ public abstract class Piece {
 	char type;
 	boolean hasValidMove;
 	boolean validMoves[][];
-	public Piece(int color, char type,int x, int y ){
+	public Piece(int color, char type,int xPos, int yPos ){
 		this.color = color;
 		this.type = type;
-		this.xPos = x;
-		this.yPos = y;
-		if (color==1) code = "b";
-		else if (color== -1) code="w";
+		this.xPos = xPos;
+		this.yPos = yPos;
+		this.validMoves = new boolean[8][8];
+		if (color==-1) code = "b";
+		else if (color== 1) code="w";
 		if (type=='P') code = code+"p";
 		if (type=='R') code = code +"R";
 		if (type=='N') code = code + "N";
@@ -25,6 +26,7 @@ public abstract class Piece {
 	}
 
 	public boolean move(Piece board[][], int x, int y, int color) {
+//		System.out.println("Moving piece "+ this.type+", "+this.color+ " to position " + x + " " + y);
 		if (this.color != color) {
 			return false;
 		}
@@ -37,10 +39,17 @@ public abstract class Piece {
 		if (!this.validMoves[x][y]) {
 			return false;
 		}
+		int i = this.xPos;
+		int j = this.yPos;
+		this.xPos = x;
+		this.yPos = y;
+		board[x][y] = this;
+		board[i][j] = null;
+		hasMoved = true;
 		return true;
 	}
 	
-	public void generateValidMoves() {
+	public void generateValidMoves(Piece[][] board) {
 		// dependent on each individual piece type
 	}
 	
