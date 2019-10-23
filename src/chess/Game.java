@@ -64,6 +64,7 @@ public class Game {
 		for (i=0;i<8;i++) {
 			for (j=0;j<8;j++) {
 				if (board[j][i]!=null) {
+					board[j][i].validMoves = new int[8][8];
 					board[j][i].generateValidMoves(board);
 				}
 			}
