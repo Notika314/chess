@@ -96,5 +96,6 @@ public class Game {
 			System.out.println(8-i);
 		}
 		System.out.println(" a  b  c  d  e  f  g  h  ");
+		System.out.println();
 	}
 }

@@ -15,8 +15,8 @@ public abstract class Piece {
 		this.xPos = xPos;
 		this.yPos = yPos;
 		this.validMoves = new int[8][8];
-		if (color==1) code = "b";
-		else if (color== -1) code="w";
+		if (color==-1) code = "b";
+		else if (color== 1) code="w";
 		if (type=='p') code = code+"p";
 		if (type=='R') code = code +"R";
 		if (type=='N') code = code + "N";
