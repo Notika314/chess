@@ -21,11 +21,13 @@ public class Chess {
 		
 		Game game = new Game();
 		game.currMove=1;
+		game.printBoard();
+		game.updateValidMoves();
+		line = scanner.nextLine();
 		while (true) {
-			System.out.println("hihi");
-			game.printBoard();
-			game.updateValidMoves();
-			line = scanner.nextLine();
+//			game.printBoard();
+//			game.updateValidMoves();
+//			line = scanner.nextLine();
 			String[] tokens = game.tokenizeInput(line);
 			if (tokens[0].contentEquals("resign")) {		//need to handle this - write the winner
 				System.out.println("Game over. Someone won");
@@ -45,12 +47,14 @@ public class Chess {
 					}
 				}
 				else {
-					System.out.println("There is no piece at this position.Try again");
+					System.out.println("Invalid move.Try again");
 					continue;
 				}
+				game.printBoard();
+				game.updateValidMoves();
+				line = scanner.nextLine(); 
 			}
-			
-			System.out.println();	
+//			System.out.println();	
 		}	
 	}
 

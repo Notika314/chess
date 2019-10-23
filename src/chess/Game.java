@@ -10,7 +10,7 @@ public class Game {
 	public Game() {
 		winner = 0;
 		isDone = false;
-		currMove = -1;
+		currMove = 1;
 		board = new Piece[8][8];
 //		board[0][0] = new Rook(-1,0,0);
 //		board[0][7] = new Rook(-1,0,7);
@@ -63,8 +63,8 @@ public class Game {
 		int i,j;
 		for (i=0;i<8;i++) {
 			for (j=0;j<8;j++) {
-				if (board[i][j]!=null) {
-					board[i][j].generateValidMoves(board);
+				if (board[j][i]!=null) {
+					board[j][i].generateValidMoves(board);
 				}
 			}
 		}
@@ -75,7 +75,7 @@ public class Game {
 		Piece piece; 
 		int i = (int)(token.charAt(0)-97);
 		int j = (int)(8-(token.charAt(1)-48));
-		System.out.println("i is "+ i+ ", j is "+j);
+//		System.out.println("i is "+ i+ ", j is "+j);
 		if (i>7 || j>7) {
 			return null;
 		}

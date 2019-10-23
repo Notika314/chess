@@ -11,6 +11,7 @@ public class Pawn extends Piece {
 	}
 	
 	public void generateValidMoves(Piece board[][]) {
+//		System.out.println("genereating moves for "+this.xPos+", "+ this.yPos);
 		this.hasValidMove = false;
 		if (hasMoved == false && board[this.xPos][this.yPos+1*this.color]==null 
 				&& board[this.xPos][this.yPos+2*this.color] == null) {
@@ -40,12 +41,13 @@ public class Pawn extends Piece {
 			this.hasValidMove = true;
 		}
 		//I think this will handle en passant valid moves
-		if (this.xPos+1 < 8 && board[this.xPos+1][this.yPos].type=='P'
+//		System.out.println(this.xPos+1);
+		if (this.xPos+1 < 8 && board[this.xPos+1][this.yPos]!=null && board[this.xPos+1][this.yPos].type=='P'
 				&& ((Pawn)board[this.xPos+1][this.yPos]).passant == true) {
 			this.validMoves[this.xPos+1][this.yPos+(1*this.color)] = true;
 			this.hasValidMove = true;
 		}
-		if (this.xPos-1 >= 0 && board[this.xPos-1][this.yPos].type=='P'
+		if (this.xPos-1 >= 0 && board[this.xPos-1][this.yPos]!=null && board[this.xPos-1][this.yPos].type=='P'
 				&& ((Pawn)board[this.xPos-1][this.yPos]).passant == true) {
 			this.validMoves[this.xPos-1][this.yPos+(1*this.color)] = true;
 			this.hasValidMove = true;
