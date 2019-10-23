@@ -46,7 +46,7 @@ public abstract class Piece {
 		this.yPos = y;
 		board[x][y] = this;
 		board[i][j] = null;
-		hasMoved = true;
+		this.hasMoved = true;
 		return true;
 	}
 	

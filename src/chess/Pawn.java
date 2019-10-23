@@ -2,7 +2,6 @@ package chess;
 
 public class Pawn extends Piece {
 
-	boolean hasMoved;
 	boolean passant;
 	
 	public Pawn(int color, int xPos, int yPos) {
