@@ -19,7 +19,7 @@ public class King extends Piece {
 		if (board[x][y] != null) {
 			return false;
 		}
-		if (!this.validMoves[x][y]) {
+		if (this.validMoves[x][y] == 0) {
 			return false;
 		}
 		return true;

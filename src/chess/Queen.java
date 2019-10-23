@@ -15,7 +15,7 @@ public class Queen extends Piece {
 			if (board[i][j] != null) {
 				break;
 			}
-			this.validMoves[i][j] = true;
+			this.validMoves[i][j] = 1;
 			this.hasValidMove = true;
 			i++;
 			j++;
@@ -26,7 +26,7 @@ public class Queen extends Piece {
 			if (board[i][j] != null) {
 				break;
 			}
-			this.validMoves[i][j] = true;
+			this.validMoves[i][j] = 1;
 			this.hasValidMove = true;
 			i++;
 			j--;
@@ -37,7 +37,7 @@ public class Queen extends Piece {
 			if (board[i][j] != null) {
 				break;
 			}
-			this.validMoves[i][j] = true;
+			this.validMoves[i][j] = 1;
 			this.hasValidMove = true;
 			i--;
 			j++;
@@ -48,7 +48,7 @@ public class Queen extends Piece {
 			if (board[i][j] != null) {
 				break;
 			}
-			this.validMoves[i][j] = true;
+			this.validMoves[i][j] = 1;
 			this.hasValidMove = true;
 			i--;
 			j--;
@@ -60,7 +60,7 @@ public class Queen extends Piece {
 			if (board[i][j] != null) {
 				break;
 			}
-			this.validMoves[i][j] = true;
+			this.validMoves[i][j] = 1;
 			this.hasValidMove = true;
 			i++;
 		}
@@ -69,7 +69,7 @@ public class Queen extends Piece {
 			if (board[i][j] != null) {
 				break;
 			}
-			this.validMoves[i][j] = true;
+			this.validMoves[i][j] = 1;
 			this.hasValidMove = true;
 			i--;
 		}
@@ -79,7 +79,7 @@ public class Queen extends Piece {
 			if (board[i][j] != null) {
 				break;
 			}
-			this.validMoves[i][j] = true;
+			this.validMoves[i][j] = 1;
 			this.hasValidMove = true;
 			j++;
 		}
@@ -88,7 +88,7 @@ public class Queen extends Piece {
 			if (board[i][j] != null) {
 				break;
 			}
-			this.validMoves[i][j] = true;
+			this.validMoves[i][j] = 1;
 			this.hasValidMove = true;
 			j--;
 		}
