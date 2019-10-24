@@ -27,7 +27,6 @@ public class Chess {
 		Game game = new Game();
 		King whiteKing = (King)game.board[4][7];
 		King blackKing = (King)game.board[4][0];
-		System.out.println("It is a "+ whiteKing.type+ " and "+ blackKing.type);
 		boolean drawOffer = false;
 		char promote = 'Q';
 		game.currMove = -1;
@@ -77,6 +76,8 @@ public class Chess {
 						int i = (int)(tokens[1].charAt(0)-97);
 						int j = (int)(8-(tokens[1].charAt(1)-48));
 						if (piece.move(game.board,i,j,game.currMove)) {
+							whiteKing.updateStatus(game.board);
+							blackKing.updateStatus(game.board);
 							if (piece.type == 'p' && ((game.currMove == -1 && j == 0) || (game.currMove == 1 && j == 7))) {
 								if (promote == 'Q') {
 									game.board[i][j] = new Queen(game.currMove,i,j);

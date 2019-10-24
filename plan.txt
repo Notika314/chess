@@ -117,4 +117,5 @@ Notes :
 1) Pieces(except for the pawns and the King don't beat the opponents yet). 
 2) Handle incorrect input (don't let program break, print message and prompt again)
 3) Castling
+4) Call super() when possible
 
