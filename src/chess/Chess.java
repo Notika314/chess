@@ -25,14 +25,9 @@ public class Chess {
 		scanner = new Scanner(System.in);
 		
 		Game game = new Game();
-<<<<<<< HEAD
-		while (true) {
-			game.printBoard();
-			game.updateValidMoves();
-			currColor = game.currMove==1? "White" : "Black";
-			System.out.println(currColor+"'s move: ");
-			line = scanner.nextLine();
-=======
+		King whiteKing = (King)game.board[4][7];
+		King blackKing = (King)game.board[4][0];
+		System.out.println("It is a "+ whiteKing.type+ " and "+ blackKing.type);
 		boolean drawOffer = false;
 		char promote = 'Q';
 		game.currMove = -1;
@@ -41,7 +36,6 @@ public class Chess {
 		System.out.print("White's move: ");
 		line = scanner.nextLine();
 		while (true) {
->>>>>>> 3aa4605c5536b580bbc34eec7eb62de943680fc3
 			String[] tokens = game.tokenizeInput(line);
 			if (tokens.length < 1) {
 				System.out.println("Illegal move, try again");
@@ -57,33 +51,6 @@ public class Chess {
 			} 
 			else if (tokens[0].contentEquals("draw") && drawOffer) {	//handle this case
 				return;
-<<<<<<< HEAD
-			} else {
-				if (game.findPiece(tokens[0])==null) {
-					System.out.println("Invalid move- no piece at position "+ tokens[0]);
-					continue;
-				} else {
-					Piece piece = game.findPiece(tokens[0]);
-					if (piece.color!=game.currMove) {
-						System.out.println("It's "+currColor+"'s turn to make a move. Try again");
-						continue;
-					}
-//					for (int i=0;i<piece.validMoves.length;i++) {
-//						for (int j=0;j<piece.validMoves.length;j++) {
-//							System.out.print(piece.validMoves[j][i]+" ");
-//						}
-//						System.out.println();
-//					}
-					int i = (int)(tokens[1].charAt(0)-97);
-					int j = (int)(8-(tokens[1].charAt(1)-48));
-					boolean moved =piece.move(game.board,i,j,piece.color);
-					if (moved) game.currMove *=-1;
-					else {
-						System.out.println("Invalid move. Try again");
-					}
-				}
-
-=======
 			} 
 			else {
 				if (tokens.length < 2) {
@@ -137,7 +104,6 @@ public class Chess {
 						System.out.println("Illegal move, try again");
 					}
 				}
->>>>>>> 3aa4605c5536b580bbc34eec7eb62de943680fc3
 			}
 			if (game.currMove == -1) {
 				System.out.print("White's move: ");
