@@ -20,7 +20,7 @@ public class Chess {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		String currColor ;
+//		String currColor ;
 		String line;
 		scanner = new Scanner(System.in);
 		
@@ -29,7 +29,6 @@ public class Chess {
 		King blackKing = (King)game.board[4][0];
 		boolean drawOffer = false;
 		char promote = 'Q';
-		game.currMove = -1;
 		game.printBoard();
 		game.updateValidMoves();
 		System.out.print("White's move: ");
