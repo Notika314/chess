@@ -12,6 +12,8 @@ public class Bishop extends Piece {
 		j = this.yPos + 1;
 		while (i < 8 && j < 8) {
 			if (board[i][j] != null) {
+				this.validMoves[i][j] = 1;
+				this.hasValidMove = true;
 				break;
 			}
 			//System.out.println("i: "+i+", j:"+j);
@@ -24,6 +26,8 @@ public class Bishop extends Piece {
 		j = this.yPos - 1;
 		while (i < 8 && j >= 0) {
 			if (board[i][j] != null) {
+				this.validMoves[i][j] = 1;
+				this.hasValidMove = true;
 				break;
 			}
 			this.validMoves[i][j] = 1;
@@ -35,6 +39,8 @@ public class Bishop extends Piece {
 		j = this.yPos + 1;
 		while (i >= 0 && j < 8) {
 			if (board[i][j] != null) {
+				this.validMoves[i][j] = 1;
+				this.hasValidMove = true;
 				break;
 			}
 			this.validMoves[i][j] = 1;
@@ -46,6 +52,8 @@ public class Bishop extends Piece {
 		j = this.yPos - 1;
 		while (i >= 0 && j >= 0) {
 			if (board[i][j] != null) {
+				this.validMoves[i][j] = 1;
+				this.hasValidMove = true;
 				break;
 			}
 			this.validMoves[i][j] = 1;
