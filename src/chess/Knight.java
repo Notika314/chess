@@ -41,9 +41,6 @@ public class Knight extends Piece {
 			this.hasValidMove = true;
 			this.validMoves[i+2][j-1] = 1;
 		}
-		
-		
-		
 	}
 	
 }
