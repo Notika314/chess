@@ -1,20 +1,20 @@
 package chess;
 
 public abstract class Piece {
-	boolean hasMoved;
 	int color;
 	int xPos;
 	int yPos;
-	String code;
 	char type;
 	boolean hasValidMove;
 	int validMoves[][];
-	public Piece(int color, char type,int xPos, int yPos ){
+	
+	public Piece(int color, char type, int xPos, int yPos ){
 		this.color = color;
 		this.type = type;
 		this.xPos = xPos;
 		this.yPos = yPos;
 		this.validMoves = new int[8][8];
+<<<<<<< HEAD
 		if (color==-1) code = "b";
 		else if (color== 1) code="w";
 		if (type=='p') code = code+"p";
@@ -23,6 +23,8 @@ public abstract class Piece {
 		if (type=='B') code = code+"B";
 		if (type=='Q') code += "Q";
 		if (type=='K') code+="K";
+=======
+>>>>>>> 3aa4605c5536b580bbc34eec7eb62de943680fc3
 	}
 
 	public boolean move(Piece board[][], int x, int y, int color) {
@@ -33,10 +35,6 @@ public abstract class Piece {
 		if (x > 7 || x < 0 || y > 7 || y < 0) {
 			return false;
 		}
-		/*
-		if (board[x][y] != null) {
-			return false;
-		}*/
 		if (this.validMoves[x][y] == 0) {
 			return false;
 		}
@@ -46,7 +44,6 @@ public abstract class Piece {
 		this.yPos = y;
 		board[x][y] = this;
 		board[i][j] = null;
-		hasMoved = true;
 		return true;
 	}
 	
@@ -55,7 +52,10 @@ public abstract class Piece {
 	}
 	
 	public String toString() {
-		return code;
+		if (color == 1) {
+			return "b" + this.type;
+		}
+		return "w" + this.type;
 	}
 	
 }

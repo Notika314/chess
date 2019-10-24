@@ -1,13 +1,33 @@
 package chess;
 
 public class Pawn extends Piece {
-
+	
 	boolean hasMoved;
 	boolean passant;
 	
 	public Pawn(int color, int xPos, int yPos) {
 		super(color,'p',xPos,yPos);
-		
+	}
+	
+	public boolean move(Piece board[][], int x, int y, int color) {
+//		System.out.println("Moving piece "+ this.type+", "+this.color+ " to position " + x + " " + y);
+		if (this.color != color) {
+			return false;
+		}
+		if (x > 7 || x < 0 || y > 7 || y < 0) {
+			return false;
+		}
+		if (this.validMoves[x][y] == 0) {
+			return false;
+		}
+		int i = this.xPos;
+		int j = this.yPos;
+		this.xPos = x;
+		this.yPos = y;
+		board[x][y] = this;
+		board[i][j] = null;
+		this.hasMoved = true;
+		return true;
 	}
 	
 	public void generateValidMoves(Piece board[][]) {

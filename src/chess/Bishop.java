@@ -14,7 +14,7 @@ public class Bishop extends Piece {
 			if (board[i][j] != null) {
 				break;
 			}
-			System.out.println("i: "+i+", j:"+j);
+			//System.out.println("i: "+i+", j:"+j);
 			this.validMoves[i][j] = 1;
 			this.hasValidMove = true;
 			i++;
