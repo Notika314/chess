@@ -21,6 +21,7 @@ public class King extends Piece {
 			return false;
 		}
 		if (this.validMoves[x][y] == 0) {
+			System.out.println("Line 24");
 			return false;
 		}
 		for (int i=0;i<8;i++) {
@@ -37,20 +38,69 @@ public class King extends Piece {
 				}
 			}
 		}
-		this.hasMoved = true;
-		int i = this.xPos;
-		int j = this.yPos;
-		this.xPos = x;
-		this.yPos = y;
-		board[x][y] = this;
-		board[i][j] = null;
+		if (this.validMoves[x][y] == 1) {
+			this.hasMoved = true;
+			int i = this.xPos;
+			int j = this.yPos;
+			this.xPos = x;
+			this.yPos = y;
+			board[x][y] = this;
+			board[i][j] = null;
+		} else if (this.validMoves[x][y]==2) {
+			System.out.println("Have to do castling now to "+ x + y);
+			if (x==6) {
+				Rook theRook = (Rook)board[7][y];
+				theRook.xPos = 5;
+				theRook.yPos = y;
+				theRook.hasMoved = true;
+				board[7][y]=null;
+				int lastX = this.xPos;
+				int lastY = this.yPos;
+				this.xPos = x;
+				this.yPos = y;
+				this.hasMoved = true;
+				board[x][y]=this;
+				board[5][y]=theRook;
+				board[lastX][lastY]=null;
+			} else if (x==2) {
+				Rook theRook = (Rook)board[0][y];
+				theRook.xPos = 3;
+				theRook.yPos = y;
+				theRook.hasMoved = true;
+				board[0][y]=null;
+				int lastX = this.xPos;
+				int lastY = this.yPos;
+				this.xPos = x;
+				this.yPos = y;
+				this.hasMoved = true;
+				board[x][y]=this;
+				board[3][y]=theRook;
+				board[lastX][lastY]=null;
+			}
+		}
 		return true;
 	}
 	
-	private boolean isSafeForSliding(int x, int y) {
-		boolean result = true;
-		
-		return result;
+	private boolean isSafeForSliding(int x, int y,Piece[][] board) {
+//		boolean result = true;
+		for (int i=0;i<8;i++) {
+			for (int j=0;j<8;j++) {
+				if (board[i][j]!=null && board[i][j].color!=this.color) {
+					Piece opponent = board[i][j];
+					for (int k=0;k<8;k++) {
+						for (int l=0;l<8;l++) {
+							if (k==x && l==y && opponent.validMoves[k][l]>0) {
+//								result = false;
+								return false;
+							}
+						}
+					}
+				}
+			}
+		}
+//		System.out.println("Is safe is "+ result + " for "+ this.xPos+this.yPos+" at "+x+y);
+//		return result;
+		return true;
 	}
 	
 	public void updateStatus(Piece[][] board) {
@@ -107,25 +157,29 @@ public class King extends Piece {
 		//adding validMoves for castling here:
 		if (!this.hasMoved && board[this.xPos+3][this.yPos].type=='R' &&
 				!(board[this.xPos+3][this.yPos].hasMoved) ) {
-			System.out.println("There is a Rook for castling on "+ (this.xPos+3)+this.yPos);
+//			System.out.println("There is a Rook for castling on "+ (this.xPos+3)+this.yPos);
 			boolean clear = true;
-			for (int i=1;i<4;i++) {
-				if ( board[this.xPos+i][this.yPos]!=null || !(isSafeForSliding(this.xPos+i,this.yPos)) ) {
+			for (int i=1;i<3;i++) {
+				if ( board[this.xPos+i][this.yPos]!=null || !(isSafeForSliding(this.xPos+i,this.yPos,board)) ) {
+//					System.out.println("cant castle, checking "+(this.xPos+i)+(this.yPos));
 					clear = false;
-				}
+				} 
+//				else System.out.println("Position "+(this.xPos+i)+this.yPos+" is safe to slide");
 			}
-			if (clear) this.validMoves[this.xPos+3][this.yPos] = 2;
+			if (clear) this.validMoves[this.xPos+2][this.yPos] = 2;
 		}
 		if (!this.hasMoved && board[this.xPos-4][this.yPos].type=='R' &&
 				!(board[this.xPos-4][this.yPos].hasMoved) ) {
-			System.out.println("There is a Rook for castling on "+ (this.xPos-4)+this.yPos);
+//			System.out.println("There is a Rook for castling on "+ (this.xPos-4)+this.yPos);
 			boolean clear = true;
-			for (int i=1;i<5;i++) {
-				if ( board[this.xPos-i][this.yPos]!=null || !(isSafeForSliding(this.xPos-i,this.yPos)) ) {
+			for (int i=1;i<4;i++) {
+				if ( board[this.xPos-i][this.yPos]!=null || !(isSafeForSliding(this.xPos-i,this.yPos,board)) ) {
+//					System.out.println("cant castle, checking "+(this.xPos-i)+(this.yPos));
 					clear = false;
-				}
+				} 
+//				else System.out.println("Position "+(this.xPos-i)+this.yPos+" is safe to slide");
 			}
-			if (clear) this.validMoves[this.xPos-4][this.yPos] = 2;
+			if (clear) this.validMoves[this.xPos-2][this.yPos] = 2;
 		}
 		
 		
