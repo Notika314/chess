@@ -101,12 +101,23 @@ public class Chess {
 							}
 							game.currMove *= -1;
 							game.printBoard();
+							/////// I wonder if this part is still needed
 							game.updateValidMoves();
 							whiteKing.updateStatus(game.board);
 							blackKing.updateStatus(game.board);
+							////////
 							whiteKing.generateValidMoves(game.board);
 							blackKing.generateValidMoves(game.board);
-
+							
+							
+							///// Stalemate
+							if (game.hasNoValidMoves()) {
+								System.out.println("Draw by stalemate");
+								return;
+							}
+							//// end of Stalemate
+							
+							
 						}
 						else {
 							System.out.println("Illegal move, try again");
