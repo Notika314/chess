@@ -102,11 +102,15 @@ public class Chess {
 							game.currMove *= -1;
 							game.printBoard();
 							game.updateValidMoves();
+							game.disarmShields();
 							whiteKing.updateStatus(game.board);
 							blackKing.updateStatus(game.board);
 							whiteKing.generateValidMoves(game.board);
 							blackKing.generateValidMoves(game.board);
-
+							if (!game.validMoveCheck()) {
+								System.out.println("stalemate");
+								return;
+							}
 						}
 						else {
 							System.out.println("Illegal move, try again");
