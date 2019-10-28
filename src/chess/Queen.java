@@ -13,10 +13,8 @@ public class Queen extends Piece {
 		j = this.yPos + 1;
 		while (i < 8 && j < 8) {
 			if (board[i][j] != null) {
-				if (board[i][j].color != this.color) {
-					this.validMoves[i][j] = 1;
-					this.hasValidMove = true;
-				}	
+				this.validMoves[i][j] = 1;
+				this.hasValidMove = true;
 				break;
 			}
 			this.validMoves[i][j] = 1;
@@ -28,10 +26,8 @@ public class Queen extends Piece {
 		j = this.yPos - 1;
 		while (i < 8 && j >= 0) {
 			if (board[i][j] != null) {
-				if (board[i][j].color != this.color) {
-					this.validMoves[i][j] = 1;
-					this.hasValidMove = true;
-				}	
+				this.validMoves[i][j] = 1;
+				this.hasValidMove = true;
 				break;
 			}
 			this.validMoves[i][j] = 1;
@@ -43,10 +39,8 @@ public class Queen extends Piece {
 		j = this.yPos + 1;
 		while (i >= 0 && j < 8) {
 			if (board[i][j] != null) {
-				if (board[i][j].color != this.color) {
-					this.validMoves[i][j] = 1;
-					this.hasValidMove = true;
-				}	
+				this.validMoves[i][j] = 1;
+				this.hasValidMove = true;
 				break;
 			}
 			this.validMoves[i][j] = 1;
@@ -58,10 +52,8 @@ public class Queen extends Piece {
 		j = this.yPos - 1;
 		while (i >= 0 && j >= 0) {
 			if (board[i][j] != null) {
-				if (board[i][j].color != this.color) {
-					this.validMoves[i][j] = 1;
-					this.hasValidMove = true;
-				}	
+				this.validMoves[i][j] = 1;
+				this.hasValidMove = true;
 				break;
 			}
 			this.validMoves[i][j] = 1;
@@ -74,10 +66,8 @@ public class Queen extends Piece {
 		j = this.yPos;
 		while (i < 8) {
 			if (board[i][j] != null) {
-				if (board[i][j].color != this.color) {
-					this.validMoves[i][j] = 1;
-					this.hasValidMove = true;
-				}	
+				this.validMoves[i][j] = 1;
+				this.hasValidMove = true;
 				break;
 			}
 			this.validMoves[i][j] = 1;
@@ -87,10 +77,8 @@ public class Queen extends Piece {
 		i = this.xPos - 1;
 		while (i >= 0) {
 			if (board[i][j] != null) {
-				if (board[i][j].color != this.color) {
-					this.validMoves[i][j] = 1;
-					this.hasValidMove = true;
-				}	
+				this.validMoves[i][j] = 1;
+				this.hasValidMove = true;
 				break;
 			}
 			this.validMoves[i][j] = 1;
@@ -101,10 +89,8 @@ public class Queen extends Piece {
 		j = this.yPos + 1;
 		while (j < 8) {
 			if (board[i][j] != null) {
-				if (board[i][j].color != this.color) {
-					this.validMoves[i][j] = 1;
-					this.hasValidMove = true;
-				}	
+				this.validMoves[i][j] = 1;
+				this.hasValidMove = true;
 				break;
 			}
 			this.validMoves[i][j] = 1;
@@ -114,10 +100,8 @@ public class Queen extends Piece {
 		j = this.yPos - 1;
 		while (j >= 0) {
 			if (board[i][j] != null) {
-				if (board[i][j].color != this.color) {
-					this.validMoves[i][j] = 1;
-					this.hasValidMove = true;
-				}	
+				this.validMoves[i][j] = 1;
+				this.hasValidMove = true;
 				break;
 			}
 			this.validMoves[i][j] = 1;

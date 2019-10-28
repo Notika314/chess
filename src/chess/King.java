@@ -47,7 +47,7 @@ public class King extends Piece {
 			board[x][y] = this;
 			board[i][j] = null;
 		} else if (this.validMoves[x][y]==2) {
-			//System.out.println("Have to do castling now to "+ x + y);
+			System.out.println("Have to do castling now to "+ x + y);
 			if (x==6) {
 				Rook theRook = (Rook)board[7][y];
 				theRook.xPos = 5;
@@ -82,6 +82,7 @@ public class King extends Piece {
 	}
 	
 	private boolean isSafeForSliding(int x, int y,Piece[][] board) {
+//		boolean result = true;
 		for (int i=0;i<8;i++) {
 			for (int j=0;j<8;j++) {
 				if (board[i][j]!=null && board[i][j].color!=this.color) {
@@ -89,6 +90,7 @@ public class King extends Piece {
 					for (int k=0;k<8;k++) {
 						for (int l=0;l<8;l++) {
 							if (k==x && l==y && opponent.validMoves[k][l]>0) {
+//								result = false;
 								return false;
 							}
 						}
@@ -96,6 +98,8 @@ public class King extends Piece {
 				}
 			}
 		}
+//		System.out.println("Is safe is "+ result + " for "+ this.xPos+this.yPos+" at "+x+y);
+//		return result;
 		return true;
 	}
 	
@@ -151,31 +155,31 @@ public class King extends Piece {
 		}
 		
 		//adding validMoves for castling here:
-		if (!this.hasMoved && !this.isInCheck && board[this.xPos+3][this.yPos] != null && board[this.xPos+3][this.yPos].type=='R' &&
+		if (!this.hasMoved && board[this.xPos+3][this.yPos].type=='R' &&
 				!(board[this.xPos+3][this.yPos].hasMoved) ) {
+//			System.out.println("There is a Rook for castling on "+ (this.xPos+3)+this.yPos);
 			boolean clear = true;
 			for (int i=1;i<3;i++) {
 				if ( board[this.xPos+i][this.yPos]!=null || !(isSafeForSliding(this.xPos+i,this.yPos,board)) ) {
+//					System.out.println("cant castle, checking "+(this.xPos+i)+(this.yPos));
 					clear = false;
-					break;
 				} 
+//				else System.out.println("Position "+(this.xPos+i)+this.yPos+" is safe to slide");
 			}
-			if (clear) {
-				this.validMoves[this.xPos+2][this.yPos] = 2;
-			}
+			if (clear) this.validMoves[this.xPos+2][this.yPos] = 2;
 		}
-		if (!this.hasMoved && !this.isInCheck && board[this.xPos-4][this.yPos] != null && board[this.xPos-4][this.yPos].type=='R' &&
+		if (!this.hasMoved && board[this.xPos-4][this.yPos].type=='R' &&
 				!(board[this.xPos-4][this.yPos].hasMoved) ) {
+//			System.out.println("There is a Rook for castling on "+ (this.xPos-4)+this.yPos);
 			boolean clear = true;
 			for (int i=1;i<4;i++) {
 				if ( board[this.xPos-i][this.yPos]!=null || !(isSafeForSliding(this.xPos-i,this.yPos,board)) ) {
+//					System.out.println("cant castle, checking "+(this.xPos-i)+(this.yPos));
 					clear = false;
-					break;
 				} 
+//				else System.out.println("Position "+(this.xPos-i)+this.yPos+" is safe to slide");
 			}
-			if (clear) {
-				this.validMoves[this.xPos-2][this.yPos] = 2;
-			}
+			if (clear) this.validMoves[this.xPos-2][this.yPos] = 2;
 		}
 		
 		
