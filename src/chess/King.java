@@ -115,17 +115,15 @@ public class King extends Piece {
 	}
 	
 	public void updateStatus(Piece[][] board) {
-		System.out.println("updating status of "+this.color+" king");
 		this.isInCheck=false;
 		for (int i=0;i<8;i++) {
 			for (int j=0;j<8;j++) {
 				if (board[i][j]!=null && board[i][j].color!=this.color) {
-					Piece opponent = board[i][j];					
+					Piece opponent = board[i][j];
+					opponent.generateValidMoves(board);
 					for (int k=0;k<8;k++) {
 						for (int l=0;l<8;l++) {
-							if (k==this.xPos && l== this.yPos) System.out.println("Valid moves of "+opponent.type+opponent.color+" at king's location is"+opponent.validMoves[k][l]);
 							if (k==this.xPos && l==this.yPos && opponent.validMoves[k][l]>0) {
-								System.out.println("King now is inCheck");
 								this.isInCheck=true;
 							}
 						}
@@ -169,8 +167,8 @@ public class King extends Piece {
 		}
 		
 		//adding validMoves for castling here:
-		if (!this.isInCheck) {
-			if (!this.hasMoved && board[this.xPos+3][this.yPos]!=null && board[this.xPos+3][this.yPos].type=='R' &&
+		if (!this.isInCheck && !this.hasMoved) {
+			if ( board[this.xPos+3][this.yPos]!=null && board[this.xPos+3][this.yPos].type=='R' &&
 					!(board[this.xPos+3][this.yPos].hasMoved) ) {
 				boolean clear = true;
 				for (int i=1;i<3;i++) {
@@ -180,7 +178,7 @@ public class King extends Piece {
 				}
 				if (clear) this.validMoves[this.xPos+2][this.yPos] = 2;
 			}
-			if (!this.hasMoved && board[this.xPos-4][this.yPos]!=null && board[this.xPos-4][this.yPos].type=='R' &&
+			if ( board[this.xPos-4][this.yPos]!=null && board[this.xPos-4][this.yPos].type=='R' &&
 					!(board[this.xPos-4][this.yPos].hasMoved) ) {
 				boolean clear = true;
 				for (int i=1;i<4;i++) {
@@ -190,7 +188,7 @@ public class King extends Piece {
 				}
 				if (clear) this.validMoves[this.xPos-2][this.yPos] = 2;
 			}
-		} else System.out.println("Can't castle while in check");
+		} 
 		
 		checkValidMovesForSafety(board);		
 	}
