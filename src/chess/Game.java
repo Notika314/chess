@@ -39,6 +39,29 @@ public class Game {
 		String[] tokens = input.split("\\s+");
 		return tokens;
 	}
+	
+	
+	///// Stalemate
+	public boolean hasNoValidMoves() {
+		for (int i=0;i<8;i++) {
+			for (int j=0;j<8;j++) {
+				if (this.board[i][j]!=null && this.board[i][j].color==this.currMove) {
+					Piece piece = this.board[i][j];
+					for (int a=0;a<8;a++) {
+						for (int b=0;b<8;b++) {
+							if (piece.validMoves[a][b]>0) {
+								return false;
+							}
+						}
+					}
+				}
+			}
+		}
+		return true;
+	}
+	///// End of Stalemate
+	
+	
 	public void updateValidMoves() {
 		int i,j;
 		for (i=0;i<8;i++) {
