@@ -10,7 +10,6 @@ public class Pawn extends Piece {
 	}
 		
 	public boolean move(Piece board[][], int x, int y, int color) {
-//		System.out.println("Moving piece "+ this.type+", "+this.color+ " to position " + x + " " + y);
 		if (this.color != color) {
 			return false;
 		}
@@ -30,7 +29,6 @@ public class Pawn extends Piece {
 		return true;
 	}
 	
-	
 	public void generateValidMoves(Piece board[][]) {
 		
 		this.hasValidMove = false;
@@ -49,7 +47,6 @@ public class Pawn extends Piece {
 		if ((this.yPos+(1*this.color) < 8 && this.yPos+(1*this.color) >= 0) 
 				&& this.xPos+1 < 8 && board[this.xPos+1][this.yPos+(1*this.color)] != null
 				&& board[this.xPos+1][this.yPos+(1*this.color)].color != this.color) {
-			//System.out.println("xpos+1: "+(this.xPos+1)+", ypos+...: "+(this.yPos+(1*this.color)));
 			this.validMoves[this.xPos+1][this.yPos+(1*this.color)] = 1;
 			this.hasValidMove = true;
 		}

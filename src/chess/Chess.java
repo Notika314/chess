@@ -20,7 +20,6 @@ public class Chess {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-//		String currColor ;
 		String line;
 		scanner = new Scanner(System.in);
 		
@@ -75,8 +74,8 @@ public class Chess {
 						int i = (int)(tokens[1].charAt(0)-97);
 						int j = (int)(8-(tokens[1].charAt(1)-48));
 						if (piece.move(game.board,i,j,game.currMove)) {
-							whiteKing.updateStatus(game.board);
-							blackKing.updateStatus(game.board);
+//							whiteKing.updateStatus(game.board);
+//							blackKing.updateStatus(game.board);
 							if (piece.type == 'p' && ((game.currMove == -1 && j == 0) || (game.currMove == 1 && j == 7))) {
 								if (promote == 'Q') {
 									game.board[i][j] = new Queen(game.currMove,i,j);
@@ -95,6 +94,9 @@ public class Chess {
 							game.currMove *= -1;
 							game.printBoard();
 							game.updateValidMoves();
+							game.updateValidMoves();
+							whiteKing.updateStatus(game.board);
+							blackKing.updateStatus(game.board);
 						}
 						else {
 							System.out.println("Illegal move, try again");
