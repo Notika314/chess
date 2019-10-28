@@ -30,8 +30,33 @@ public class Pawn extends Piece {
 	}
 	
 	public void generateValidMoves(Piece board[][]) {
-		
 		this.hasValidMove = false;
+		if (this.kingShield != null) {
+			if (this.xPos+1 == this.kingShield[0] && this.yPos-(1*this.color) == this.kingShield[1]) {
+				this.validMoves[this.xPos-1][this.yPos+(1*this.color)] = 1;
+				this.hasValidMove = true;
+				return;
+			}
+			if (this.xPos-1 == this.kingShield[0] && this.yPos-(1*this.color) == this.kingShield[1]) {
+				this.validMoves[this.xPos+1][this.yPos+(1*this.color)] = 1;
+				this.hasValidMove = true;
+				return;
+			}
+			if (this.xPos != this.kingShield[0]) {
+				return;
+			}
+			if (hasMoved == false && board[this.xPos][this.yPos+1*this.color]==null 
+					&& board[this.xPos][this.yPos+2*this.color] == null) {
+				this.validMoves[this.xPos][this.yPos+(2*this.color)] = 1;
+				this.hasValidMove = true;
+			}
+			if ((this.yPos+(1*this.color) < 8 && this.yPos+(1*this.color) >= 0) 
+					&& board[this.xPos][this.yPos+1*this.color] == null) {
+				this.validMoves[this.xPos][this.yPos+(1*this.color)] = 1;
+				this.hasValidMove = true;
+			}
+			return;
+		}
 		if (hasMoved == false && board[this.xPos][this.yPos+1*this.color]==null 
 				&& board[this.xPos][this.yPos+2*this.color] == null) {
 			this.validMoves[this.xPos][this.yPos+(2*this.color)] = 1;

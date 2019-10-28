@@ -103,6 +103,7 @@ public class Chess {
 							game.printBoard();
 							/////// I wonder if this part is still needed
 							game.updateValidMoves();
+							game.disarmShields();
 							whiteKing.updateStatus(game.board);
 							blackKing.updateStatus(game.board);
 							////////
@@ -112,7 +113,7 @@ public class Chess {
 							
 							///// Stalemate
 							if (game.hasNoValidMoves()) {
-								System.out.println("Draw by stalemate");
+								System.out.println("Stalemate");
 								return;
 							}
 							//// end of Stalemate

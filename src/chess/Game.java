@@ -75,6 +75,16 @@ public class Game {
 		return;
 	}
 	
+	public void disarmShields() {
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
+				if (board[j][i] != null) {
+					board[j][i].kingShield = null;
+				}
+			}
+		}
+	}
+	
 	public Piece findPiece(String token) {
 		Piece piece; 
 		int i = (int)(token.charAt(0)-97);
