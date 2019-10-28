@@ -39,17 +39,6 @@ public class Game {
 		String[] tokens = input.split("\\s+");
 		return tokens;
 	}
-	
-	public boolean validMoveCheck() {
-		for (int i = 0; i < 8; i++) {
-			for (int j = 0; j < 8; j++) {
-				if (board[j][i] != null && !board[j][i].hasValidMove) {
-					return false;
-				}
-			}
-		}
-		return true;
-	}
 	public void updateValidMoves() {
 		int i,j;
 		for (i=0;i<8;i++) {
@@ -60,16 +49,7 @@ public class Game {
 				}
 			}
 		}
-	}
-	
-	public void disarmShields() {
-		for (int i = 0; i < 8; i++) {
-			for (int j = 0; j < 8; j++) {
-				if (board[j][i] != null) {
-					board[j][i].kingShield = null;
-				}
-			}
-		}
+		return;
 	}
 	
 	public Piece findPiece(String token) {

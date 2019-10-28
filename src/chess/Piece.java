@@ -8,7 +8,6 @@ public abstract class Piece {
 	boolean hasValidMove;
 	int validMoves[][];
 	boolean hasMoved;
-	int kingShield[];
 	
 	public Piece(int color, char type, int xPos, int yPos ){
 		this.color = color;
@@ -41,24 +40,6 @@ public abstract class Piece {
 	
 	public void generateValidMoves(Piece[][] board) {
 		// dependent on each individual piece type
-	}
-		
-	public void shield(Piece[][] board, int x, int y, int deltaX, int deltaY) {
-		int i = x, j = y;
-		i += deltaX;
-		j += deltaY;
-		while (i < 8 && i >= 0 && j < 8 && j >= 0) {
-			if (board[i][j] != null) {
-				if (board[i][j].color == board[x][y].color && board[i][j].type == 'K') {
-					board[x][y].kingShield = new int[] {i,j};
-				}
-				else {
-					return;
-				}
-			}
-			i += deltaX;
-			j += deltaY;
-		}
 	}
 	
 	public String toString() {

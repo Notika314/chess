@@ -8,47 +8,36 @@ public class Knight extends Piece {
 	
 	public void generateValidMoves(Piece board[][]) {
 		this.hasValidMove = false;
-		if (this.kingShield != null) {
-			return;
-		}
 		int i = this.xPos, j = this.yPos;
-		if ((i+2 < 8 && i+2 >= 0 && j+1 < 8 && j+1 >= 0) && 
-				(board[i+2][j+1] == null || board[i+2][j+1].color != this.color)) {
+		if (i+2 < 8 && i+2 >= 0 && j+1 < 8 && j+1 >= 0) {
 			this.hasValidMove = true;
 			this.validMoves[i+2][j+1] = 1;
 		}
-		if ((i+1 < 8 && i+1 >= 0 && j+2 < 8 && j+2 >= 0) && 
-				(board[i+1][j+2] == null || board[i+1][j+2].color != this.color)) {
+		if (i+1 < 8 && i+1 >= 0 && j+2 < 8 && j+2 >= 0) {
 			this.hasValidMove = true;
 			this.validMoves[i+1][j+2] = 1;
 		}
-		if ((i-1 < 8 && i-1 >= 0 && j+2 < 8 && j+2 >= 0) && 
-				(board[i-1][j+2] == null || board[i-1][j+2].color != this.color)) {
+		if (i-1 < 8 && i-1 >= 0 && j+2 < 8 && j+2 >= 0) {
 			this.hasValidMove = true;
 			this.validMoves[i-1][j+2] = 1;
 		}
-		if ((i-2 < 8 && i-2 >= 0 && j+1 < 8 && j+1 >= 0) && 
-				(board[i-2][j+1] == null || board[i-2][j+1].color != this.color)) {
+		if (i-2 < 8 && i-2 >= 0 && j+1 < 8 && j+1 >= 0) {
 			this.hasValidMove = true;
 			this.validMoves[i-2][j+1] = 1;
 		}
-		if ((i-2 < 8 && i-2 >= 0 && j-1 < 8 && j-1 >= 0) && 
-				(board[i-2][j-1] == null || board[i-2][j-1].color != this.color)) {
+		if (i-2 < 8 && i-2 >= 0 && j-1 < 8 && j-1 >= 0) {
 			this.hasValidMove = true;
 			this.validMoves[i-2][j-1] = 1;
 		}
-		if ((i-1 < 8 && i-1 >= 0 && j-2 < 8 && j-2 >= 0) && 
-				(board[i-1][j-2] == null || board[i-1][j-2].color != this.color)) {
+		if (i-1 < 8 && i-1 >= 0 && j-2 < 8 && j-2 >= 0) {
 			this.hasValidMove = true;
 			this.validMoves[i-1][j-2] = 1;
 		}
-		if ((i+1 < 8 && i+1 >= 0 && j-2 < 8 && j-2 >= 0) && 
-				(board[i+1][j-2] == null || board[i+1][j-2].color != this.color)) {
+		if (i+1 < 8 && i+1 >= 0 && j-2 < 8 && j-2 >= 0) {
 			this.hasValidMove = true;
 			this.validMoves[i+1][j-2] = 1;
 		}
-		if ((i+2 < 8 && i+2 >= 0 && j-1 < 8 && j-1 >= 0) && 
-				(board[i+2][j-1] == null || board[i+2][j-1].color != this.color)) {
+		if (i+2 < 8 && i+2 >= 0 && j-1 < 8 && j-1 >= 0) {
 			this.hasValidMove = true;
 			this.validMoves[i+2][j-1] = 1;
 		}

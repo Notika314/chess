@@ -6,48 +6,62 @@ public class Bishop extends Piece {
 		super(color,'B',x,y);
 	}
 	
-	public void path(Piece[][] board, int deltaX, int deltaY) {
-		int i = this.xPos + deltaX;
-		int j = this.yPos + deltaY;
-		while (i < 8 && i >= 0 && j < 8 && j >= 0) {
+	public void generateValidMoves(Piece board[][]) {
+		int i, j;
+		i = this.xPos + 1;
+		j = this.yPos + 1;
+		while (i < 8 && j < 8) {
 			if (board[i][j] != null) {
-				if (board[i][j].color != this.color) {
-					shield(board, i, j, deltaX, deltaY);
-					this.validMoves[i][j] = 1;
-					this.hasValidMove = true;
-				}	
-				return;
+				this.validMoves[i][j] = 1;
+				this.hasValidMove = true;
+				break;
+			}
+			//System.out.println("i: "+i+", j:"+j);
+			this.validMoves[i][j] = 1;
+			this.hasValidMove = true;
+			i++;
+			j++;
+		}
+		i = this.xPos + 1;
+		j = this.yPos - 1;
+		while (i < 8 && j >= 0) {
+			if (board[i][j] != null) {
+				this.validMoves[i][j] = 1;
+				this.hasValidMove = true;
+				break;
 			}
 			this.validMoves[i][j] = 1;
 			this.hasValidMove = true;
-			i += deltaX;
-			j += deltaY;
+			i++;
+			j--;
+		}
+		i = this.xPos - 1;
+		j = this.yPos + 1;
+		while (i >= 0 && j < 8) {
+			if (board[i][j] != null) {
+				this.validMoves[i][j] = 1;
+				this.hasValidMove = true;
+				break;
+			}
+			this.validMoves[i][j] = 1;
+			this.hasValidMove = true;
+			i--;
+			j++;
+		}
+		i = this.xPos - 1;
+		j = this.yPos - 1;
+		while (i >= 0 && j >= 0) {
+			if (board[i][j] != null) {
+				this.validMoves[i][j] = 1;
+				this.hasValidMove = true;
+				break;
+			}
+			this.validMoves[i][j] = 1;
+			this.hasValidMove = true;
+			i--;
+			j--;
 		}
 	}
 	
-	public void generateValidMoves(Piece board[][]) {
-		this.hasValidMove = false;
-		if (this.kingShield != null) {
-			int deltaX = this.xPos - this.kingShield[0];
-			int deltaY = this.yPos - this.kingShield[1];
-			if (deltaX != 0 && deltaY != 0) {
-				int slope = deltaY/deltaX;
-				if (slope > 0) {
-					path(board,1,1);
-					path(board,-1,-1);
-				}
-				else {
-					path(board,1,-1);
-					path(board,-1,1);
-				}
-				return;
-			}
-			return;
-		}
-		path(board,1,1);
-		path(board,1,-1);
-		path(board,-1,1);
-		path(board,-1,-1);
-	}	
 	
 }

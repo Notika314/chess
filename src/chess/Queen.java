@@ -6,62 +6,108 @@ public class Queen extends Piece {
 		super(color,'Q',x,y);
 	}
 	
-	public void path(Piece[][] board, int deltaX, int deltaY) {
-		int i = this.xPos + deltaX;
-		int j = this.yPos + deltaY;
-		while (i < 8 && i >= 0 && j < 8 && j >= 0) {
+	public void generateValidMoves(Piece board[][]) {
+		int i, j;
+		// first generate the diagonals
+		i = this.xPos + 1;
+		j = this.yPos + 1;
+		while (i < 8 && j < 8) {
 			if (board[i][j] != null) {
-				if (board[i][j].color != this.color) {
-					shield(board, i, j, deltaX, deltaY);
-					this.validMoves[i][j] = 1;
-					this.hasValidMove = true;
-				}	
-				return;
+				this.validMoves[i][j] = 1;
+				this.hasValidMove = true;
+				break;
 			}
 			this.validMoves[i][j] = 1;
 			this.hasValidMove = true;
-			i += deltaX;
-			j += deltaY;
+			i++;
+			j++;
 		}
-	}
-	
-	public void generateValidMoves(Piece board[][]) {
-		this.hasValidMove = false;
-		if (this.kingShield != null) {
-			int deltaX = this.xPos - this.kingShield[0];
-			int deltaY = this.yPos - this.kingShield[1];
-			if (deltaX != 0 && deltaY != 0) {
-				int slope = deltaY/deltaX;
-				if (slope > 0) {
-					path(board,1,1);
-					path(board,-1,-1);
-				}
-				else {
-					path(board,1,-1);
-					path(board,-1,1);
-				}
-				return;
+		i = this.xPos + 1;
+		j = this.yPos - 1;
+		while (i < 8 && j >= 0) {
+			if (board[i][j] != null) {
+				this.validMoves[i][j] = 1;
+				this.hasValidMove = true;
+				break;
 			}
-			if (deltaY == 0) {
-				path(board,1,0);
-				path(board,-1,0);
-				return;
-			}
-			if (deltaX == 0) {
-				path(board,0,1);
-				path(board,0,-1);
-				return;
-			}
-			return;
+			this.validMoves[i][j] = 1;
+			this.hasValidMove = true;
+			i++;
+			j--;
 		}
-		path(board,1,1);
-		path(board,1,-1);
-		path(board,-1,1);
-		path(board,-1,-1);
-		path(board,1,0);
-		path(board,-1,0);
-		path(board,0,1);
-		path(board,0,-1);
+		i = this.xPos - 1;
+		j = this.yPos + 1;
+		while (i >= 0 && j < 8) {
+			if (board[i][j] != null) {
+				this.validMoves[i][j] = 1;
+				this.hasValidMove = true;
+				break;
+			}
+			this.validMoves[i][j] = 1;
+			this.hasValidMove = true;
+			i--;
+			j++;
+		}
+		i = this.xPos - 1;
+		j = this.yPos - 1;
+		while (i >= 0 && j >= 0) {
+			if (board[i][j] != null) {
+				this.validMoves[i][j] = 1;
+				this.hasValidMove = true;
+				break;
+			}
+			this.validMoves[i][j] = 1;
+			this.hasValidMove = true;
+			i--;
+			j--;
+		}
+		// second generate the horizontals
+		i = this.xPos + 1;
+		j = this.yPos;
+		while (i < 8) {
+			if (board[i][j] != null) {
+				this.validMoves[i][j] = 1;
+				this.hasValidMove = true;
+				break;
+			}
+			this.validMoves[i][j] = 1;
+			this.hasValidMove = true;
+			i++;
+		}
+		i = this.xPos - 1;
+		while (i >= 0) {
+			if (board[i][j] != null) {
+				this.validMoves[i][j] = 1;
+				this.hasValidMove = true;
+				break;
+			}
+			this.validMoves[i][j] = 1;
+			this.hasValidMove = true;
+			i--;
+		}
+		i = this.xPos;
+		j = this.yPos + 1;
+		while (j < 8) {
+			if (board[i][j] != null) {
+				this.validMoves[i][j] = 1;
+				this.hasValidMove = true;
+				break;
+			}
+			this.validMoves[i][j] = 1;
+			this.hasValidMove = true;
+			j++;
+		}
+		j = this.yPos - 1;
+		while (j >= 0) {
+			if (board[i][j] != null) {
+				this.validMoves[i][j] = 1;
+				this.hasValidMove = true;
+				break;
+			}
+			this.validMoves[i][j] = 1;
+			this.hasValidMove = true;
+			j--;
+		}
 	}
 	
 }
