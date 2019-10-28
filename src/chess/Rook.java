@@ -14,8 +14,10 @@ public class Rook extends Piece {
 		j = this.yPos;
 		while (i < 8) {
 			if (board[i][j] != null) {
-				this.validMoves[i][j] = 1;
-				this.hasValidMove = true;
+				if (board[i][j].color != this.color) {
+					this.validMoves[i][j] = 1;
+					this.hasValidMove = true;
+				}	
 				break;
 			}
 			this.validMoves[i][j] = 1;
@@ -25,8 +27,10 @@ public class Rook extends Piece {
 		i = this.xPos - 1;
 		while (i >= 0) {
 			if (board[i][j] != null) {
-				this.validMoves[i][j] = 1;
-				this.hasValidMove = true;
+				if (board[i][j].color != this.color) {
+					this.validMoves[i][j] = 1;
+					this.hasValidMove = true;
+				}	
 				break;
 			}
 			this.validMoves[i][j] = 1;
@@ -37,8 +41,10 @@ public class Rook extends Piece {
 		j = this.yPos + 1;
 		while (j < 8) {
 			if (board[i][j] != null) {
-				this.validMoves[i][j] = 1;
-				this.hasValidMove = true;
+				if (board[i][j].color != this.color) {
+					this.validMoves[i][j] = 1;
+					this.hasValidMove = true;
+				}	
 				break;
 			}
 			this.validMoves[i][j] = 1;
@@ -48,8 +54,10 @@ public class Rook extends Piece {
 		j = this.yPos - 1;
 		while (j >= 0) {
 			if (board[i][j] != null) {
-				this.validMoves[i][j] = 1;
-				this.hasValidMove = true;
+				if (board[i][j].color != this.color) {
+					this.validMoves[i][j] = 1;
+					this.hasValidMove = true;
+				}	
 				break;
 			}
 			this.validMoves[i][j] = 1;
