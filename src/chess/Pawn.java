@@ -37,7 +37,55 @@ public class Pawn extends Piece {
 			if (danger[2] != -1) {
 				return;
 			}
+			if (hasMoved == false && board[this.xPos][this.yPos+1*this.color]==null 
+					&& board[this.xPos][this.yPos+2*this.color] == null &&
+					board[danger[0]][danger[1]].validMoves[this.xPos][this.yPos+(2*this.color)] == 2) {
+				this.validMoves[this.xPos][this.yPos+(2*this.color)] = 1;
+				this.hasValidMove = true;
+			}
+			if ((this.yPos+(1*this.color) < 8 && this.yPos+(1*this.color) >= 0) 
+					&& board[this.xPos][this.yPos+1*this.color] == null && 
+					board[danger[0]][danger[1]].validMoves[this.xPos][this.yPos+(2*this.color)] == 2) {
+				this.validMoves[this.xPos][this.yPos+(1*this.color)] = 1;
+				this.hasValidMove = true;
+			}
+			//This should handle attacks
 			
+			if ((this.yPos+(1*this.color) < 8 && this.yPos+(1*this.color) >= 0) 
+					&& this.xPos+1 < 8 && board[this.xPos+1][this.yPos+(1*this.color)] != null
+					&& board[this.xPos+1][this.yPos+(1*this.color)].color != this.color &&
+					danger[0] == this.xPos+1 && danger[1] == this.yPos+(1*this.color)) {
+				if (board[this.xPos+1][this.yPos+(1*this.color)].type == 'K') {
+					flag();
+					((King)board[this.xPos+1][this.yPos+(1*this.color)]).isInCheck = true;
+				}
+				this.validMoves[this.xPos+1][this.yPos+(1*this.color)] = 1;
+				this.hasValidMove = true;
+			}
+			if ((this.yPos+(1*this.color) < 8 && this.yPos+(1*this.color) >= 0) 
+					&& this.xPos-1 >= 0 && board[this.xPos-1][this.yPos+(1*this.color)] != null
+					&& board[this.xPos-1][this.yPos+(1*this.color)].color != this.color &&
+					danger[0] == this.xPos+1 && danger[1] == this.yPos+(1*this.color)) {
+				if (board[this.xPos-1][this.yPos+(1*this.color)].type == 'K') {
+					flag();
+					((King)board[this.xPos-1][this.yPos+(1*this.color)]).isInCheck = true;
+				}
+				this.validMoves[this.xPos-1][this.yPos+(1*this.color)] = 1;
+				this.hasValidMove = true;
+			}
+			//I think this will handle en passant valid moves
+			if (this.xPos+1 < 8 && board[this.xPos+1][this.yPos]!=null && board[this.xPos+1][this.yPos].type=='p'
+					&& ((Pawn)board[this.xPos+1][this.yPos]).passant == true && board[this.xPos+1][this.yPos+(1*this.color)] == null &&
+					board[danger[0]][danger[1]].validMoves[this.xPos+1][this.yPos+(1*this.color)] == 2) {
+				this.validMoves[this.xPos+1][this.yPos+(1*this.color)] = 2;
+				this.hasValidMove = true;
+			}
+			if (this.xPos-1 >= 0 && board[this.xPos-1][this.yPos]!=null && board[this.xPos-1][this.yPos].type=='p'
+					&& ((Pawn)board[this.xPos-1][this.yPos]).passant == true && board[this.xPos-1][this.yPos+(1*this.color)] == null &&
+					board[danger[0]][danger[1]].validMoves[this.xPos-1][this.yPos+(1*this.color)] == 2) {
+				this.validMoves[this.xPos-1][this.yPos+(1*this.color)] = 2;
+				this.hasValidMove = true;
+			}
 			return;
 		}
 		if (this.kingShield != null) {

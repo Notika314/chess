@@ -83,8 +83,6 @@ public class Chess {
 						int i = (int)(tokens[1].charAt(0)-97);
 						int j = (int)(8-(tokens[1].charAt(1)-48));
 						if (piece.move(game.board,i,j,game.currMove)) {
-							//whiteKing.updateStatus(game.board);
-							//blackKing.updateStatus(game.board);
 							if (piece.type == 'p' && ((game.currMove == -1 && j == 0) || (game.currMove == 1 && j == 7))) {
 								if (promote == 'Q') {
 									game.board[i][j] = new Queen(game.currMove,i,j);
@@ -106,8 +104,13 @@ public class Chess {
 							game.updateValidMoves(-game.currMove);
 							game.updateValidMoves(game.currMove);
 							game.disarmShields();
-							//whiteKing.updateStatus(game.board);
-							//blackKing.updateStatus(game.board);
+							if (game.currMove == -1) {
+								whiteKing.updateStatus(game.board);
+
+							}
+							else {
+								blackKing.updateStatus(game.board);
+							}
 							////////
 							//whiteKing.generateValidMoves(game.board);
 							//blackKing.generateValidMoves(game.board);

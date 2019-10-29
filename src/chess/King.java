@@ -37,6 +37,12 @@ public class King extends Piece {
 //				}
 //			}
 //		}
+		if (this.color == -1) {
+			Piece.wKingIsInDanger = new int[] {-1, -1, -1, -1};
+		}
+		else {
+			Piece.bKingIsInDanger = new int[] {-1, -1, -1, -1};
+		}
 		if (this.validMoves[x][y] == 1) {
 			this.hasMoved = true;
 			int i = this.xPos;
