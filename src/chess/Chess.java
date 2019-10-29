@@ -113,10 +113,22 @@ public class Chess {
 							//blackKing.generateValidMoves(game.board);
 							
 							
+							///// Stalemate or Checkmate 
+							if (game.hasNoValidMoves() ) {
+								King king = game.currMove==-1 ?  whiteKing : blackKing;
+								if (!king.isInCheck) {
+									System.out.println("Draw by stalemate");
+									return;
+								} else {
+									String winner = game.currMove==-1? "Black" : "White" ;
+									System.out.println(winner+" wins");
+									return;
+								}
 							///// Stalemate
-							if (game.hasNoValidMoves()) {
-								System.out.println("Stalemate");
-								return;
+//							if (game.hasNoValidMoves()) {
+//								System.out.println("Stalemate");
+//								return;
+
 							}
 							//// end of Stalemate
 							
