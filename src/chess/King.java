@@ -103,71 +103,130 @@ public class King extends Piece {
 		return true;
 	}
 	
-	private void checkValidMovesForSafety(Piece[][] board) {
-		for (int i=0;i<0;i++) {
-			for (int j=0;j<0;j++) {
-				if (board[i][j]!=null && board[i][j].color!=this.color) {
-					Piece opponent = board[i][j];
-					for (int k=0;k<8;k++) {
-						for (int l=0;l<8;l++) {
-							if (opponent.validMoves[k][l]>0) {
-								this.validMoves[k][l]=0;
-							}
-						}
-					}
-				}
-			}
-		}
-	}
+//	private void checkValidMovesForSafety(Piece[][] board) {
+//		for (int i=0;i<0;i++) {
+//			for (int j=0;j<0;j++) {
+//				if (board[i][j]!=null && board[i][j].color!=this.color) {
+//					Piece opponent = board[i][j];
+//					for (int k=0;k<8;k++) {
+//						for (int l=0;l<8;l++) {
+//							if (opponent.validMoves[k][l]>0) {
+//								this.validMoves[k][l]=0;
+//							}
+//						}
+//					}
+//				}
+//			}
+//		}
+//	}
 	
-	public void updateStatus(Piece[][] board) {
+	public boolean updateStatus(Piece[][] board) {
 		this.isInCheck=false;
 		for (int i=0;i<8;i++) {
 			for (int j=0;j<8;j++) {
-				if (board[i][j]!=null && board[i][j].color!=this.color) {
+//				System.out.println("i is "+i+" j is "+j);
+				if (board[i][j]!=null && board[i][j].color!=this.color ) {
+					
 					Piece opponent = board[i][j];
-					opponent.generateValidMoves(board);
+					int [][] tempMoves = opponent.validMoves;
+					if (opponent.type!='K') opponent.generateValidMoves(board);
 					for (int k=0;k<8;k++) {
 						for (int l=0;l<8;l++) {
 							if (k==this.xPos && l==this.yPos && opponent.validMoves[k][l]>0) {
 								this.isInCheck=true;
+								board[i][j].validMoves = tempMoves;
+								return false;
 							}
 						}
 					}
+					board[i][j].validMoves = tempMoves;
 				}
 			}
 		}
+		return true;
 	}
 	
 	public void generateValidMoves(Piece board[][]) {
-		if (this.yPos+(this.color)<8 && this.yPos+(this.color)>=0 && (board[this.xPos][this.yPos+this.color]==null 
+		System.out.println("generating valid moves for "+this.type+this.color);
+		this.hasValidMove = false;
+		System.out.println("Position is "+this.xPos+this.yPos+",checking "+this.xPos+ (this.yPos+this.color));
+		if ((this.yPos+(this.color)<8 && this.yPos+(this.color)>=0 )&& (board[this.xPos][this.yPos+this.color]==null 
 				|| board[this.xPos][this.yPos+this.color].color!=this.color)) {
-			this.validMoves[this.xPos][this.yPos+this.color]=1;
+			Piece temp = board[this.xPos][this.yPos+this.color];
+			int i= this.xPos;
+			int j = this.yPos;
+			this.yPos = this.yPos+this.color;
+			board[this.xPos][this.yPos+this.color] = this;
+			board[i][j]=null;
+			System.out.println("Simulating move to "+this.xPos+this.yPos);
+			if (this.updateStatus(board))	{
+				this.validMoves[this.xPos][this.yPos+this.color]=1;
+				this.hasValidMove = true;
+			}
+			board[i][j]=this;
+			this.xPos=i;
+			this.yPos = j;
+			board[this.xPos][this.yPos+this.color]=temp;
+//			this.validMoves[this.xPos][this.yPos+this.color]=1;
 		}
 		if (this.yPos-(this.color)<8 && this.yPos-(this.color)>=0 && (board[this.xPos][this.yPos-this.color]==null 
 				|| board[this.xPos][this.yPos-this.color].color!=this.color)) {
-			this.validMoves[this.xPos][this.yPos-this.color]=1;
+//			Piece temp = board[this.xPos][this.yPos-this.color];
+//			int i= this.xPos;
+//			int j = this.yPos;
+//			this.yPos = this.yPos-this.color;
+//			board[this.xPos][this.yPos-this.color] = this;
+//			board[i][j]=null;
+//			if (this.updateStatus(board))	{
+				this.validMoves[this.xPos][this.yPos-this.color]=1;
+//				this.hasValidMove = true;
+//			}
+//			board[i][j]=this;
+//			this.xPos=i;
+//			this.yPos = j;
+//			board[temp.xPos][temp.yPos]=temp;
+//			this.validMoves[this.xPos][this.yPos-this.color]=1;
 		}
 		if (this.xPos+1<8 && this.xPos+1>=0 && (board[this.xPos+1][this.yPos]==null 
 				|| board[this.xPos+1][this.yPos].color!=this.color)) {
-			this.validMoves[this.xPos+1][this.yPos]=1;
+//			Piece temp = board[this.xPos+1][this.yPos];
+//			int i= this.xPos;
+//			int j = this.yPos;
+//			this.xPos = this.xPos+1;
+//			board[this.xPos+1][this.yPos] = this;
+//			board[i][j]=null;
+//			if (this.updateStatus(board))	{
+				this.validMoves[this.xPos+1][this.yPos]=1;
+//				this.hasValidMove = true;
+//			}
+//			board[i][j]=this;
+//			this.xPos=i;
+//			this.yPos = j;
+//			board[temp.xPos][temp.yPos]=temp;
+//			this.validMoves[this.xPos+1][this.yPos]=1;
+			
 		}
+		
 		if (this.xPos-1<8 && this.xPos-1>=0 && (board[this.xPos-1][this.yPos]==null 
 				|| board[this.xPos-1][this.yPos].color!=this.color)) {
 			this.validMoves[this.xPos-1][this.yPos]=1;
 		}
+		
 		if (this.yPos+(this.color)<8 && this.yPos+this.color>=0 && (this.xPos+1)<8 && (this.xPos-1)>=0 && (board[this.xPos+1][this.yPos+this.color]==null 
 				|| board[this.xPos+1][this.yPos+this.color].color!=this.color)) {
 			this.validMoves[this.xPos+1][this.yPos+this.color]=1;
 		}
+		
 		if (this.yPos+(this.color)<8 && this.yPos+this.color>=0 && (this.xPos-1)<8 && (this.xPos-1)>=0 && (board[this.xPos-1][this.yPos+this.color]==null 
 				|| board[this.xPos-1][this.yPos+this.color].color!=this.color)) {
 			this.validMoves[this.xPos-1][this.yPos+this.color]=1;
 		}
+		
 		if (this.yPos-(this.color)<8 && this.yPos-this.color>=0 && (this.xPos+1)<8 && (this.xPos+1)>=0 && (board[this.xPos+1][this.yPos-this.color]==null 
 				|| board[this.xPos+1][this.yPos-this.color].color!=this.color)) {
 			this.validMoves[this.xPos+1][this.yPos-this.color]=1;
 		}
+		
 		if (this.yPos-(this.color)<8 && this.yPos-this.color>=0 && (this.xPos-1)<8 && (this.xPos-1)>=0 && (board[this.xPos-1][this.yPos-this.color]==null 
 				|| board[this.xPos-1][this.yPos-this.color].color!=this.color)) {
 			this.validMoves[this.xPos-1][this.yPos-this.color]=1;
@@ -197,7 +256,7 @@ public class King extends Piece {
 			}
 		} 
 		
-		checkValidMovesForSafety(board);		
+//		checkValidMovesForSafety(board);		
 	}
 	
 }
