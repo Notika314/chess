@@ -132,6 +132,7 @@ public class King extends Piece {
 			}
 		}
 	}
+	
 	public void generateValidMoves(Piece board[][]) {
 		if (this.yPos+(this.color)<8 && this.yPos+(this.color)>=0 && (board[this.xPos][this.yPos+this.color]==null 
 				|| board[this.xPos][this.yPos+this.color].color!=this.color)) {

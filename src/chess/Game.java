@@ -30,8 +30,8 @@ public class Game {
 		board[7][7] = new Rook(-1,7,7);
 
 		for (int i=0;i<8;i++) {
-			board[i][1] = new Pawn(1,i,1);
-			board[i][6] = new Pawn(-1,i,6);
+			//board[i][1] = new Pawn(1,i,1);
+			//board[i][6] = new Pawn(-1,i,6);
 		}
 		return;
 	}
@@ -62,11 +62,11 @@ public class Game {
 	///// End of Stalemate
 	
 	
-	public void updateValidMoves() {
+	public void updateValidMoves(int color) {
 		int i,j;
 		for (i=0;i<8;i++) {
 			for (j=0;j<8;j++) {
-				if (board[j][i]!=null) {
+				if (board[j][i]!=null && board[j][i].color == color) {
 					board[j][i].validMoves = new int[8][8];
 					board[j][i].generateValidMoves(board);
 				}

@@ -9,6 +9,10 @@ public abstract class Piece {
 	int validMoves[][];
 	boolean hasMoved;
 	int kingShield[];
+	static int wKingPos[];
+	static int bKingPos[];
+	static int wKingIsInDanger[] = {-1, -1, -1, -1};
+	static int bKingIsInDanger[] = {-1, -1, -1, -1};
 	
 	public Piece(int color, char type, int xPos, int yPos ){
 		this.color = color;
@@ -29,6 +33,12 @@ public abstract class Piece {
 		if (this.validMoves[x][y] == 0) {
 			return false;
 		}
+		if (this.color == -1) {
+			Piece.wKingIsInDanger = new int[] {-1, -1, -1, -1};
+		}
+		else {
+			Piece.bKingIsInDanger = new int[] {-1, -1, -1, -1};
+		}
 		this.hasMoved = true;
 		int i = this.xPos;
 		int j = this.yPos;
@@ -39,8 +49,40 @@ public abstract class Piece {
 		return true;
 	}
 	
+	public int[] danger(int color) {
+		if (color == -1) {
+			return Piece.wKingIsInDanger;
+		}
+		else {
+			return Piece.bKingIsInDanger;
+		}
+	}
+	
 	public void generateValidMoves(Piece[][] board) {
 		// dependent on each individual piece type
+	}
+	
+	public void flag() {
+		if (this.color == 1) {
+			if (Piece.wKingIsInDanger[0] == -1) {
+				Piece.wKingIsInDanger[0] = this.xPos;
+				Piece.wKingIsInDanger[1] = this.yPos;
+			}
+			else {
+				Piece.wKingIsInDanger[2] = this.xPos;
+				Piece.wKingIsInDanger[3] = this.yPos;
+			}
+		}
+		else {
+			if (Piece.bKingIsInDanger[0] == -1) {
+				Piece.bKingIsInDanger[0] = this.xPos;
+				Piece.bKingIsInDanger[1] = this.yPos;
+			}
+			else {
+				Piece.bKingIsInDanger[2] = this.xPos;
+				Piece.bKingIsInDanger[3] = this.yPos;
+			}
+		}
 	}
 		
 	public void shield(Piece[][] board, int x, int y, int deltaX, int deltaY) {

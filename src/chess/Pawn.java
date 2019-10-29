@@ -31,6 +31,15 @@ public class Pawn extends Piece {
 	
 	public void generateValidMoves(Piece board[][]) {
 		this.hasValidMove = false;
+		this.validMoves = new int[8][8];
+		int[] danger = danger(this.color);
+		if (danger[0] != -1) {
+			if (danger[2] != -1) {
+				return;
+			}
+			
+			return;
+		}
 		if (this.kingShield != null) {
 			if (this.xPos+1 == this.kingShield[0] && this.yPos-(1*this.color) == this.kingShield[1]) {
 				this.validMoves[this.xPos-1][this.yPos+(1*this.color)] = 1;
@@ -72,12 +81,20 @@ public class Pawn extends Piece {
 		if ((this.yPos+(1*this.color) < 8 && this.yPos+(1*this.color) >= 0) 
 				&& this.xPos+1 < 8 && board[this.xPos+1][this.yPos+(1*this.color)] != null
 				&& board[this.xPos+1][this.yPos+(1*this.color)].color != this.color) {
+			if (board[this.xPos+1][this.yPos+(1*this.color)].type == 'K') {
+				flag();
+				((King)board[this.xPos+1][this.yPos+(1*this.color)]).isInCheck = true;
+			}
 			this.validMoves[this.xPos+1][this.yPos+(1*this.color)] = 1;
 			this.hasValidMove = true;
 		}
 		if ((this.yPos+(1*this.color) < 8 && this.yPos+(1*this.color) >= 0) 
 				&& this.xPos-1 >= 0 && board[this.xPos-1][this.yPos+(1*this.color)] != null
 				&& board[this.xPos-1][this.yPos+(1*this.color)].color != this.color) {
+			if (board[this.xPos-1][this.yPos+(1*this.color)].type == 'K') {
+				flag();
+				((King)board[this.xPos-1][this.yPos+(1*this.color)]).isInCheck = true;
+			}
 			this.validMoves[this.xPos-1][this.yPos+(1*this.color)] = 1;
 			this.hasValidMove = true;
 		}
