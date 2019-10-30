@@ -22,9 +22,10 @@ public class Chess {
 	public static void main(String[] args) {
 		String line;
 		scanner = new Scanner(System.in);
+		
 		/*
 		try {
-			scanner = new Scanner(new File("Stalemate.txt"));
+			scanner = new Scanner(new File("Chess.txt"));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

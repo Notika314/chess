@@ -19,7 +19,7 @@ public class Knight extends Piece {
 		int i = this.xPos, j = this.yPos;
 		int[] danger = danger(this.color);
 		if (danger[0] != -1) {
-			if (danger[2] != -1) {
+			if (danger[2] != -1 || this.kingShield != null) {
 				return;
 			}
 			if ((i+2 < 8 && i+2 >= 0 && j+1 < 8 && j+1 >= 0) && 

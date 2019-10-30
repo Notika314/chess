@@ -308,6 +308,7 @@ public class King extends Piece {
 		}
 		this.isInCheck = tempCheck;
 		
+		
 		//adding validMoves for castling here:
 		if (!this.isInCheck && !this.hasMoved) {
 			if ( board[this.xPos+3][this.yPos]!=null && board[this.xPos+3][this.yPos].type=='R' &&
