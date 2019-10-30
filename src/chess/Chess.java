@@ -25,7 +25,7 @@ public class Chess {
 		
 		/*
 		try {
-			scanner = new Scanner(new File("Stalemate.txt"));
+			scanner = new Scanner(new File("Game2.txt"));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -89,32 +89,49 @@ public class Chess {
 						if (tokens[2].contentEquals("draw?")) {
 							drawOffer = true;
 						}
-						else if (tokens[2].contentEquals("R")) {
-							promote = 'R';
+						else {
+							if (piece != null && (piece.type != 'p' || (
+									(piece.color == -1 && piece.yPos != 1) || (piece.color == 1 && piece.yPos != 6)))) {
+								System.out.println("Illegal move, try again");
+								line = scanner.nextLine();
+								continue;
+							}
+							else if (tokens[2].equals("Q")) {
+								promote = 'Q';
+							}
+							else if (tokens[2].contentEquals("R")) {
+								promote = 'R';
+							}
+							else if (tokens[2].contentEquals("N")) {
+								promote = 'N';
+							}
+							else if (tokens[2].contentEquals("B")) {
+								promote = 'B';
+							}
+							else {
+								System.out.println("Illegal move, try again");
+								line = scanner.nextLine();
+								continue;
+							}
 						}
-						else if (tokens[2].contentEquals("N")) {
-							promote = 'N';
-						}
-						else if (tokens[2].contentEquals("B")) {
-							promote = 'B';
-						}
+						
 					}
 					if (piece!=null) {
 						int i = (int)(tokens[1].charAt(0)-97);
 						int j = (int)(8-(tokens[1].charAt(1)-48));
-						if (piece.move(game.board,i,j,game.currMove)) {
-							if (piece.type == 'p' && ((game.currMove == -1 && j == 0) || (game.currMove == 1 && j == 7))) {
+						if (piece.move(game.board,i,j,piece.color)) {
+							if (piece.type == 'p' && ((piece.color == -1 && j == 0) || (piece.color == 1 && j == 7))) {
 								if (promote == 'Q') {
-									game.board[i][j] = new Queen(game.currMove,i,j);
+									game.board[i][j] = new Queen(piece.color,i,j);
 								}
 								else if (promote == 'R') {
-									game.board[i][j] = new Rook(game.currMove,i,j);
+									game.board[i][j] = new Rook(piece.color,i,j);
 								}
 								else if (promote == 'N') {
-									game.board[i][j] = new Knight(game.currMove,i,j);
+									game.board[i][j] = new Knight(piece.color,i,j);
 								}
 								else {
-									game.board[i][j] = new Bishop(game.currMove,i,j);
+									game.board[i][j] = new Bishop(piece.color,i,j);
 								}
 								promote = 'Q';
 							}
@@ -125,9 +142,9 @@ public class Chess {
 							else {
 								blackKing.isInCheck = false;
 							}
-
-							game.currMove *= -1;
 							
+							game.currMove *= -1;
+							game.clearPassant(game.currMove);
 							game.printBoard();
 							/////// I wonder if this part is still needed
 							game.updateValidMoves(-game.currMove);
@@ -141,7 +158,6 @@ public class Chess {
 								blackKing.generateValidMoves(game.board);
 							}
 							game.disarmShields();
-							
 							/*
 							if (game.board[1][0] != null) {
 								for (int l = 0; l<8; l++) {
@@ -156,6 +172,7 @@ public class Chess {
 							///// Stalemate or Checkmate 
 							King king2 = game.currMove==-1 ?  whiteKing : blackKing;
 							if (king2.isInCheck && !king2.hasValidMove && !game.protector()) {
+								System.out.println("Checkmate");
 								String winner = game.currMove==-1? "Black" : "White" ;
 								System.out.println(winner+" wins");
 								return;
@@ -164,9 +181,11 @@ public class Chess {
 								King king = game.currMove==-1 ?  whiteKing : blackKing;
 								if (!king.isInCheck) {
 									System.out.println("Stalemate");
+									System.out.println("draw");
 									return;
 								} 
 								else {
+									System.out.println("Checkmate");
 									String winner = game.currMove==-1? "Black" : "White" ;
 									System.out.println(winner+" wins");
 									return;

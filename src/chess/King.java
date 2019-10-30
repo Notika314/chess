@@ -18,6 +18,7 @@ public class King extends Piece {
 		King temp = new King(this.color, this.xPos, this.yPos);
 		temp.validMoves = this.validMoves;
 		temp.isInCheck = this.isInCheck;
+		temp.hasMoved = this.hasMoved;
 		return temp;
 	}
 

@@ -12,6 +12,8 @@ public class Pawn extends Piece {
 	public Pawn copy() {
 		Pawn temp = new Pawn(this.color, this.xPos, this.yPos);
 		temp.validMoves = this.validMoves;
+		temp.hasMoved = this.hasMoved;
+		temp.passant = this.passant;
 		return temp;
 	}
 		
@@ -24,6 +26,12 @@ public class Pawn extends Piece {
 		}
 		if (this.validMoves[x][y] == 0) {
 			return false;
+		}
+		if (Math.abs(y-this.yPos) > 1) {
+			this.passant = true;
+		}
+		if (this.validMoves[x][y] == 2) {
+			board[x][y-this.color] = null;
 		}
 		int i = this.xPos;
 		int j = this.yPos;

@@ -11,6 +11,7 @@ public class Rook extends Piece {
 	public Piece copy() {
 		Rook temp = new Rook(this.color, this.xPos, this.yPos);
 		temp.validMoves = this.validMoves;
+		temp.hasMoved = this.hasMoved;
 		return temp;
 	}
 

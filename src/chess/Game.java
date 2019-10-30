@@ -102,6 +102,20 @@ public class Game {
 		return;
 	}
 	
+	public void clearPassant(int color) {
+		int i,j;
+		for (i=0;i<8;i++) {
+			for (j=0;j<8;j++) {
+				if (board[j][i]!=null && board[j][i].color == color && board[j][i].type == 'p') {
+					//board[j][i].validMoves = new int[8][8];
+					//System.out.println("test"+board[j][i]+"\t"+j+"\t"+i);
+					((Pawn)board[j][i]).passant = false;
+				}
+			}
+		}
+		return;
+	}
+	
 	public void disarmShields() {
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
