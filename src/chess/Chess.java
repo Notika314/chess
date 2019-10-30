@@ -40,6 +40,8 @@ public class Chess {
 //		game.printBoard();
 		game.updateValidMoves(-1);
 		game.updateValidMoves(1);
+		whiteKing.generateValidMoves(game.board);
+		blackKing.generateValidMoves(game.board);
 		game.printBoard();
 		System.out.print("White's move: ");
 		line = scanner.nextLine();
@@ -119,7 +121,7 @@ public class Chess {
 					if (piece!=null) {
 						int i = (int)(tokens[1].charAt(0)-97);
 						int j = (int)(8-(tokens[1].charAt(1)-48));
-						if (piece.move(game.board,i,j,piece.color)) {
+						if (piece.move(game.board,i,j,game.currMove)) {
 							if (piece.type == 'p' && ((piece.color == -1 && j == 0) || (piece.color == 1 && j == 7))) {
 								if (promote == 'Q') {
 									game.board[i][j] = new Queen(piece.color,i,j);
@@ -158,17 +160,6 @@ public class Chess {
 								blackKing.generateValidMoves(game.board);
 							}
 							game.disarmShields();
-							/*
-							if (game.board[1][0] != null) {
-								for (int l = 0; l<8; l++) {
-									for (int k = 0; k<8; k++) {
-										System.out.print(game.board[1][0].validMoves[k][l]+"\t");
-									}
-									System.out.println();
-								}
-								System.out.println(Piece.bKingIsInDanger[0] +""+Piece.bKingIsInDanger[1]);
-
-							}*/
 							///// Stalemate or Checkmate 
 							King king2 = game.currMove==-1 ?  whiteKing : blackKing;
 							if (king2.isInCheck && !king2.hasValidMove && !game.protector()) {
