@@ -6,7 +6,7 @@ public class Knight extends Piece {
 		super(color,'N',x,y);
 	}
 	
-	public Knight copy() {
+	public Piece copy() {
 		Knight temp = new Knight(this.color, this.xPos, this.yPos);
 		temp.validMoves = this.validMoves;
 		return temp;
@@ -46,6 +46,7 @@ public class Knight extends Piece {
 				this.hasValidMove = true;
 				this.validMoves[i-2][j+1] = 1;
 			}
+			
 			if ((i-2 < 8 && i-2 >= 0 && j-1 < 8 && j-1 >= 0) && 
 					(board[i-2][j-1] == null || board[i-2][j-1].color != this.color) &&
 					((i-2 == danger[0] && j-1 == danger[1] || board[danger[0]][danger[1]].validMoves[i-2][j-1] == 2))) {

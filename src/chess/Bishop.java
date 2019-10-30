@@ -9,7 +9,7 @@ public class Bishop extends Piece {
 	public Piece copy() {
 		Bishop temp = new Bishop(this.color, this.xPos, this.yPos);
 		temp.validMoves = this.validMoves;
-		return this;
+		return temp;
 	}
 
 	
@@ -30,7 +30,7 @@ public class Bishop extends Piece {
 				}	
 				return;
 			}
-			this.validMoves[i][j] = 1;
+			this.validMoves[i][j] += 1;
 			this.hasValidMove = true;
 			i += deltaX;
 			j += deltaY;

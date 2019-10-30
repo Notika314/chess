@@ -1,6 +1,9 @@
 package chess;
 
-public abstract class Piece implements Cloneable {
+public abstract class Piece {
+	/**
+	 * 
+	 */
 	int color;
 	int xPos;
 	int yPos;
@@ -9,8 +12,6 @@ public abstract class Piece implements Cloneable {
 	int validMoves[][];
 	boolean hasMoved;
 	int kingShield[];
-	static int wKingPos[];
-	static int bKingPos[];
 	static int wKingIsInDanger[] = {-1, -1, -1, -1};
 	static int bKingIsInDanger[] = {-1, -1, -1, -1};
 	

@@ -14,7 +14,7 @@ public class King extends Piece {
 	
 	
 	
-	public King copy() {
+	public Piece copy() {
 		King temp = new King(this.color, this.xPos, this.yPos);
 		temp.validMoves = this.validMoves;
 		temp.isInCheck = this.isInCheck;
@@ -121,17 +121,18 @@ public class King extends Piece {
 	public boolean updateStatus(Piece[][] board) {
 		int[] tempDanger = new int[4];
 		if (this.color == -1) {
-			tempDanger =  Arrays.copyOf(Piece.wKingIsInDanger, 4);
-			}
+			tempDanger = Arrays.copyOf(Piece.wKingIsInDanger, 4);
+		} 
 		else {
-			tempDanger =  Arrays.copyOf(Piece.bKingIsInDanger, 4);;
-			}
+			tempDanger = Arrays.copyOf(Piece.bKingIsInDanger, 4);
+			;
+		}
 		for (int i=0;i<8;i++) {
 			for (int j=0;j<8;j++) {
 //				System.out.println("i is "+i+" j is "+j);
 				if (board[i][j]!=null && board[i][j].color!=this.color ) {
-					
 					Piece opponent = board[i][j].copy();
+					//System.out.println(opponent.type);
 					//int [][] tempMoves = opponent.validMoves;
 					if (opponent.type!='K') {
 						opponent.generateValidMoves(board);

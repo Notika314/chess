@@ -6,7 +6,7 @@ public class Queen extends Piece {
 		super(color,'Q',x,y);
 	}
 	
-	public Queen copy() {
+	public Piece copy() {
 		Queen temp = new Queen(this.color, this.xPos, this.yPos);
 		temp.validMoves = this.validMoves;
 		return temp;

@@ -25,7 +25,7 @@ public class Chess {
 		
 		/*
 		try {
-			scanner = new Scanner(new File("Chess.txt"));
+			scanner = new Scanner(new File("Stalemate.txt"));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -45,7 +45,14 @@ public class Chess {
 		line = scanner.nextLine();
 		while (true) {
 			String[] tokens = game.tokenizeInput(line);
-			//System.out.println(line);			
+			
+			//System.out.println(line);	
+			/*
+			if (line.equals("c4 b5")) {
+				scanner = new Scanner(System.in);
+			}*/
+			
+			
 			if (tokens.length < 1) {
 				System.out.println("Illegal move, try again");
 			}
@@ -134,6 +141,18 @@ public class Chess {
 								blackKing.generateValidMoves(game.board);
 							}
 							game.disarmShields();
+							
+							/*
+							if (game.board[1][0] != null) {
+								for (int l = 0; l<8; l++) {
+									for (int k = 0; k<8; k++) {
+										System.out.print(game.board[1][0].validMoves[k][l]+"\t");
+									}
+									System.out.println();
+								}
+								System.out.println(Piece.bKingIsInDanger[0] +""+Piece.bKingIsInDanger[1]);
+
+							}*/
 							///// Stalemate or Checkmate 
 							King king2 = game.currMove==-1 ?  whiteKing : blackKing;
 							if (king2.isInCheck && !king2.hasValidMove && !game.protector()) {
