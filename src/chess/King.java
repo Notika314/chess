@@ -1,5 +1,7 @@
 package chess;
 
+import java.util.Arrays;
+
 public class King extends Piece {
 
 	boolean isInCheck;
@@ -33,20 +35,6 @@ public class King extends Piece {
 		if (this.validMoves[x][y] == 0) {
 			return false;
 		}
-//		for (int i=0;i<8;i++) {
-//			for (int j=0;j<8;j++) {
-//				if (board[i][j]!=null && board[i][j].color!=this.color) {
-//					Piece opponent = board[i][j];
-//					for (int k=0;k<8;k++) {
-//						for (int l=0;l<8;l++) {
-//							if (k==x && l==y && opponent.validMoves[k][l]>0) {
-//								return false;
-//							}
-//						}
-//					}
-//				}
-//			}
-//		}
 		if (this.color == -1) {
 			Piece.wKingIsInDanger = new int[] {-1, -1, -1, -1};
 		}
@@ -131,26 +119,29 @@ public class King extends Piece {
 //	}
 	
 	public boolean updateStatus(Piece[][] board) {
+		int[] tempDanger = new int[4];
+		if (this.color == -1) {
+			tempDanger =  Arrays.copyOf(Piece.wKingIsInDanger, 4);
+			}
+		else {
+			tempDanger =  Arrays.copyOf(Piece.bKingIsInDanger, 4);;
+			}
 		for (int i=0;i<8;i++) {
 			for (int j=0;j<8;j++) {
 //				System.out.println("i is "+i+" j is "+j);
 				if (board[i][j]!=null && board[i][j].color!=this.color ) {
 					
 					Piece opponent = board[i][j].copy();
-					/*int [][] tempMoves = opponent.validMoves;
+					//int [][] tempMoves = opponent.validMoves;
 					if (opponent.type!='K') {
 						opponent.generateValidMoves(board);
-					}*/
-					/*
-					for (int k=0;k<8;k++) {
-						for (int l=0;l<8;l++) {
-							if (k==this.xPos && l==this.yPos && opponent.validMoves[k][l]>0) {
-								this.isInCheck=true;
-								board[i][j].validMoves = tempMoves;
-								return false;
-							}
-						}
-					}*/
+					}
+					if (this.color == -1) {
+						Piece.wKingIsInDanger = Arrays.copyOf(tempDanger, 4);
+					} 
+					else {
+						Piece.bKingIsInDanger = Arrays.copyOf(tempDanger, 4);
+					}
 					if (opponent.validMoves[this.xPos][this.yPos]>0) {
 						//this.isInCheck=true;
 						//board[i][j].validMoves = tempMoves;
@@ -169,6 +160,9 @@ public class King extends Piece {
 		//System.out.println("generating valid moves for "+this.type+this.color);
 		this.hasValidMove = false;
 		this.validMoves = new int[8][8];
+		
+		boolean tempCheck = this.isInCheck;
+
 		//System.out.println("Position is "+this.xPos+this.yPos+",checking "+this.xPos+ (this.yPos+this.color));
 		if ((this.yPos+(1)<8 && this.yPos+(1)>=0 )&& (board[this.xPos][this.yPos+1]==null 
 				|| board[this.xPos][this.yPos+1].color!=this.color)) {
@@ -324,6 +318,8 @@ public class King extends Piece {
 			this.yPos = j;
 			board[this.xPos - 1][this.yPos-1] = temp;
 		}
+		
+		this.isInCheck = tempCheck;
 		
 		
 		//adding validMoves for castling here:
