@@ -8,6 +8,12 @@ public class Pawn extends Piece {
 	public Pawn(int color, int xPos, int yPos) {
 		super(color,'p',xPos,yPos);
 	}
+	
+	public Pawn copy() {
+		Pawn temp = new Pawn(this.color, this.xPos, this.yPos);
+		temp.validMoves = this.validMoves;
+		return temp;
+	}
 		
 	public boolean move(Piece board[][], int x, int y, int color) {
 		if (this.color != color) {

@@ -1,6 +1,6 @@
 package chess;
 
-public abstract class Piece {
+public abstract class Piece implements Cloneable {
 	int color;
 	int xPos;
 	int yPos;
@@ -22,6 +22,8 @@ public abstract class Piece {
 		this.hasMoved = false;
 		this.validMoves = new int[8][8];
 	}
+
+	public abstract Piece copy();
 
 	public boolean move(Piece board[][], int x, int y, int color) {
 		if (this.color != color) {
@@ -58,9 +60,7 @@ public abstract class Piece {
 		}
 	}
 	
-	public void generateValidMoves(Piece[][] board) {
-		// dependent on each individual piece type
-	}
+	public abstract void generateValidMoves(Piece[][] board);
 	
 	public void flag() {
 		if (this.color == 1) {

@@ -10,6 +10,16 @@ public class King extends Piece {
 		isInCheck = false;
 	}
 	
+	
+	
+	public King copy() {
+		King temp = new King(this.color, this.xPos, this.yPos);
+		temp.validMoves = this.validMoves;
+		temp.isInCheck = this.isInCheck;
+		return temp;
+	}
+
+	
 	public boolean move(Piece board[][], int x, int y, int color) {
 		if (this.color != color) {
 			return false;
@@ -121,15 +131,17 @@ public class King extends Piece {
 //	}
 	
 	public boolean updateStatus(Piece[][] board) {
-		this.isInCheck=false;
 		for (int i=0;i<8;i++) {
 			for (int j=0;j<8;j++) {
 //				System.out.println("i is "+i+" j is "+j);
 				if (board[i][j]!=null && board[i][j].color!=this.color ) {
 					
-					Piece opponent = board[i][j];
-					int [][] tempMoves = opponent.validMoves;
-					if (opponent.type!='K') opponent.generateValidMoves(board);
+					Piece opponent = board[i][j].copy();
+					/*int [][] tempMoves = opponent.validMoves;
+					if (opponent.type!='K') {
+						opponent.generateValidMoves(board);
+					}*/
+					/*
 					for (int k=0;k<8;k++) {
 						for (int l=0;l<8;l++) {
 							if (k==this.xPos && l==this.yPos && opponent.validMoves[k][l]>0) {
@@ -138,8 +150,13 @@ public class King extends Piece {
 								return false;
 							}
 						}
+					}*/
+					if (opponent.validMoves[this.xPos][this.yPos]>0) {
+						//this.isInCheck=true;
+						//board[i][j].validMoves = tempMoves;
+						return false;
 					}
-					board[i][j].validMoves = tempMoves;
+					//board[i][j].validMoves = tempMoves;
 				}
 			}
 		}
@@ -147,89 +164,163 @@ public class King extends Piece {
 	}
 	
 	public void generateValidMoves(Piece board[][]) {
-		System.out.println("generating valid moves for "+this.type+this.color);
+		//System.out.println("generating valid moves for "+this.type+this.color);
 		this.hasValidMove = false;
-		System.out.println("Position is "+this.xPos+this.yPos+",checking "+this.xPos+ (this.yPos+this.color));
-		if ((this.yPos+(this.color)<8 && this.yPos+(this.color)>=0 )&& (board[this.xPos][this.yPos+this.color]==null 
-				|| board[this.xPos][this.yPos+this.color].color!=this.color)) {
-			Piece temp = board[this.xPos][this.yPos+this.color];
-			int i= this.xPos;
+		this.validMoves = new int[8][8];
+		//System.out.println("Position is "+this.xPos+this.yPos+",checking "+this.xPos+ (this.yPos+this.color));
+		if ((this.yPos+(1)<8 && this.yPos+(1)>=0 )&& (board[this.xPos][this.yPos+1]==null 
+				|| board[this.xPos][this.yPos+1].color!=1)) {
+			Piece temp = board[this.xPos][this.yPos+1];
+			int i = this.xPos;
 			int j = this.yPos;
-			this.yPos = this.yPos+this.color;
-			board[this.xPos][this.yPos+this.color] = this;
+			this.yPos = this.yPos+1;
+			board[this.xPos][this.yPos] = this;
 			board[i][j]=null;
-			System.out.println("Simulating move to "+this.xPos+this.yPos);
 			if (this.updateStatus(board))	{
-				this.validMoves[this.xPos][this.yPos+this.color]=1;
+				this.validMoves[this.xPos][this.yPos] = 1;
 				this.hasValidMove = true;
 			}
 			board[i][j]=this;
 			this.xPos=i;
 			this.yPos = j;
-			board[this.xPos][this.yPos+this.color]=temp;
-//			this.validMoves[this.xPos][this.yPos+this.color]=1;
+			board[this.xPos][this.yPos+1]=temp;
 		}
-		if (this.yPos-(this.color)<8 && this.yPos-(this.color)>=0 && (board[this.xPos][this.yPos-this.color]==null 
-				|| board[this.xPos][this.yPos-this.color].color!=this.color)) {
-//			Piece temp = board[this.xPos][this.yPos-this.color];
-//			int i= this.xPos;
-//			int j = this.yPos;
-//			this.yPos = this.yPos-this.color;
-//			board[this.xPos][this.yPos-this.color] = this;
-//			board[i][j]=null;
-//			if (this.updateStatus(board))	{
-				this.validMoves[this.xPos][this.yPos-this.color]=1;
-//				this.hasValidMove = true;
-//			}
-//			board[i][j]=this;
-//			this.xPos=i;
-//			this.yPos = j;
-//			board[temp.xPos][temp.yPos]=temp;
-//			this.validMoves[this.xPos][this.yPos-this.color]=1;
+		
+		if (this.yPos-(1)<8 && this.yPos-(1)>=0 && (board[this.xPos][this.yPos-1]==null 
+				|| board[this.xPos][this.yPos-1].color!=1)) {
+			Piece temp = board[this.xPos][this.yPos - 1];
+			int i = this.xPos;
+			int j = this.yPos;
+
+			this.yPos = this.yPos - 1;
+			board[this.xPos][this.yPos] = this;
+			board[i][j] = null;
+			if (this.updateStatus(board)) {
+				this.validMoves[this.xPos][this.yPos] = 1;
+				this.hasValidMove = true;
+			}
+			board[i][j] = this;
+			this.xPos = i;
+			this.yPos = j;
+			board[this.xPos][this.yPos - 1] = temp;
 		}
 		if (this.xPos+1<8 && this.xPos+1>=0 && (board[this.xPos+1][this.yPos]==null 
-				|| board[this.xPos+1][this.yPos].color!=this.color)) {
-//			Piece temp = board[this.xPos+1][this.yPos];
-//			int i= this.xPos;
-//			int j = this.yPos;
-//			this.xPos = this.xPos+1;
-//			board[this.xPos+1][this.yPos] = this;
-//			board[i][j]=null;
-//			if (this.updateStatus(board))	{
-				this.validMoves[this.xPos+1][this.yPos]=1;
-//				this.hasValidMove = true;
-//			}
-//			board[i][j]=this;
-//			this.xPos=i;
-//			this.yPos = j;
-//			board[temp.xPos][temp.yPos]=temp;
-//			this.validMoves[this.xPos+1][this.yPos]=1;
-			
+				|| board[this.xPos+1][this.yPos].color!=1)) {
+			Piece temp = board[this.xPos + 1][this.yPos];
+			int i = this.xPos;
+			int j = this.yPos;
+			this.xPos = this.xPos + 1;
+			board[this.xPos][this.yPos] = this;
+			board[i][j] = null;
+			if (this.updateStatus(board)) {
+				this.validMoves[this.xPos][this.yPos] = 1;
+				this.hasValidMove = true;
+			}
+			board[i][j] = this;
+			this.xPos = i;
+			this.yPos = j;
+			board[this.xPos + 1][this.yPos] = temp;
 		}
+		
 		
 		if (this.xPos-1<8 && this.xPos-1>=0 && (board[this.xPos-1][this.yPos]==null 
-				|| board[this.xPos-1][this.yPos].color!=this.color)) {
-			this.validMoves[this.xPos-1][this.yPos]=1;
+				|| board[this.xPos-1][this.yPos].color!=1)) {
+			//this.validMoves[this.xPos-1][this.yPos]=1;
+			Piece temp = board[this.xPos - 1][this.yPos];
+			int i = this.xPos;
+			int j = this.yPos;
+			this.xPos = this.xPos - 1;
+			board[this.xPos][this.yPos] = this;
+			board[i][j] = null;
+			if (this.updateStatus(board)) {
+				this.validMoves[this.xPos][this.yPos] = 1;
+				this.hasValidMove = true;
+			}
+			board[i][j] = this;
+			this.xPos = i;
+			this.yPos = j;
+			board[this.xPos - 1][this.yPos] = temp;
 		}
 		
-		if (this.yPos+(this.color)<8 && this.yPos+this.color>=0 && (this.xPos+1)<8 && (this.xPos-1)>=0 && (board[this.xPos+1][this.yPos+this.color]==null 
-				|| board[this.xPos+1][this.yPos+this.color].color!=this.color)) {
-			this.validMoves[this.xPos+1][this.yPos+this.color]=1;
+		if (this.yPos+(1)<8 && this.yPos+1>=0 && (this.xPos+1)<8 && (this.xPos-1)>=0 && (board[this.xPos+1][this.yPos+1]==null 
+				|| board[this.xPos+1][this.yPos+1].color!=1)) {
+			//this.validMoves[this.xPos+1][this.yPos+1]=1;
+			Piece temp = board[this.xPos + 1][this.yPos+1];
+			int i = this.xPos;
+			int j = this.yPos;
+			this.xPos = this.xPos + 1;
+			this.yPos = this.yPos+1;
+			board[this.xPos][this.yPos] = this;
+			board[i][j] = null;
+			if (this.updateStatus(board)) {
+				this.validMoves[this.xPos][this.yPos] = 1;
+				this.hasValidMove = true;
+			}
+			board[i][j] = this;
+			this.xPos = i;
+			this.yPos = j;
+			board[this.xPos + 1][this.yPos+1] = temp;
 		}
 		
-		if (this.yPos+(this.color)<8 && this.yPos+this.color>=0 && (this.xPos-1)<8 && (this.xPos-1)>=0 && (board[this.xPos-1][this.yPos+this.color]==null 
-				|| board[this.xPos-1][this.yPos+this.color].color!=this.color)) {
-			this.validMoves[this.xPos-1][this.yPos+this.color]=1;
+		if (this.yPos+(1)<8 && this.yPos+1>=0 && (this.xPos-1)<8 && (this.xPos-1)>=0 && (board[this.xPos-1][this.yPos+1]==null 
+				|| board[this.xPos-1][this.yPos+1].color!=1)) {
+			//this.validMoves[this.xPos-1][this.yPos+1]=1;
+			Piece temp = board[this.xPos - 1][this.yPos+1];
+			int i = this.xPos;
+			int j = this.yPos;
+			this.xPos = this.xPos - 1;
+			this.yPos = this.yPos+1;
+			board[this.xPos][this.yPos] = this;
+			board[i][j] = null;
+			if (this.updateStatus(board)) {
+				this.validMoves[this.xPos][this.yPos] = 1;
+				this.hasValidMove = true;
+			}
+			board[i][j] = this;
+			this.xPos = i;
+			this.yPos = j;
+			board[this.xPos - 1][this.yPos+1] = temp;
 		}
 		
-		if (this.yPos-(this.color)<8 && this.yPos-this.color>=0 && (this.xPos+1)<8 && (this.xPos+1)>=0 && (board[this.xPos+1][this.yPos-this.color]==null 
-				|| board[this.xPos+1][this.yPos-this.color].color!=this.color)) {
-			this.validMoves[this.xPos+1][this.yPos-this.color]=1;
+		
+		if (this.yPos-(1)<8 && this.yPos-1>=0 && (this.xPos+1)<8 && (this.xPos+1)>=0 && (board[this.xPos+1][this.yPos-1]==null 
+				|| board[this.xPos+1][this.yPos-1].color!=1)) {
+			//this.validMoves[this.xPos+1][this.yPos-1]=1;
+			Piece temp = board[this.xPos + 1][this.yPos-1];
+			int i = this.xPos;
+			int j = this.yPos;
+			this.xPos = this.xPos + 1;
+			this.yPos = this.yPos-1;
+			board[this.xPos][this.yPos] = this;
+			board[i][j] = null;
+			if (this.updateStatus(board)) {
+				this.validMoves[this.xPos][this.yPos] = 1;
+				this.hasValidMove = true;
+			}
+			board[i][j] = this;
+			this.xPos = i;
+			this.yPos = j;
+			board[this.xPos + 1][this.yPos-1] = temp;
 		}
 		
-		if (this.yPos-(this.color)<8 && this.yPos-this.color>=0 && (this.xPos-1)<8 && (this.xPos-1)>=0 && (board[this.xPos-1][this.yPos-this.color]==null 
-				|| board[this.xPos-1][this.yPos-this.color].color!=this.color)) {
-			this.validMoves[this.xPos-1][this.yPos-this.color]=1;
+		if ((this.yPos-1)<8 && (this.yPos-1)>=0 && (this.xPos-1)<8 && (this.xPos-1)>=0 && (board[this.xPos-1][this.yPos-1]==null 
+				|| board[this.xPos-1][this.yPos-1].color!=1)) {
+			//this.validMoves[this.xPos-1][this.yPos-1]=1;
+			Piece temp = board[this.xPos - 1][this.yPos-1];
+			int i = this.xPos;
+			int j = this.yPos;
+			this.xPos = this.xPos - 1;
+			this.yPos = this.yPos-1;
+			board[this.xPos][this.yPos] = this;
+			board[i][j] = null;
+			if (this.updateStatus(board)) {
+				this.validMoves[this.xPos][this.yPos] = 1;
+				this.hasValidMove = true;
+			}
+			board[i][j] = this;
+			this.xPos = i;
+			this.yPos = j;
+			board[this.xPos - 1][this.yPos-1] = temp;
 		}
 		
 		//adding validMoves for castling here:
@@ -255,7 +346,7 @@ public class King extends Piece {
 				if (clear) this.validMoves[this.xPos-2][this.yPos] = 2;
 			}
 		} 
-		
+
 //		checkValidMovesForSafety(board);		
 	}
 	

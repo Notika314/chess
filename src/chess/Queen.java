@@ -6,6 +6,13 @@ public class Queen extends Piece {
 		super(color,'Q',x,y);
 	}
 	
+	public Queen copy() {
+		Queen temp = new Queen(this.color, this.xPos, this.yPos);
+		temp.validMoves = this.validMoves;
+		return temp;
+	}
+
+	
 	public void path(Piece[][] board, int deltaX, int deltaY) {
 		int i = this.xPos + deltaX;
 		int j = this.yPos + deltaY;

@@ -6,6 +6,13 @@ public class Knight extends Piece {
 		super(color,'N',x,y);
 	}
 	
+	public Knight copy() {
+		Knight temp = new Knight(this.color, this.xPos, this.yPos);
+		temp.validMoves = this.validMoves;
+		return temp;
+	}
+
+	
 	public void generateValidMoves(Piece board[][]) {
 		this.hasValidMove = false;
 		this.validMoves = new int[8][8];

@@ -6,6 +6,13 @@ public class Bishop extends Piece {
 		super(color,'B',x,y);
 	}
 	
+	public Piece copy() {
+		Bishop temp = new Bishop(this.color, this.xPos, this.yPos);
+		temp.validMoves = this.validMoves;
+		return this;
+	}
+
+	
 	public void path(Piece[][] board, int deltaX, int deltaY) {
 		int i = this.xPos + deltaX;
 		int j = this.yPos + deltaY;

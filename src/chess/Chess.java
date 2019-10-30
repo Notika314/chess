@@ -29,6 +29,7 @@ public class Chess {
 		game.printBoard();
 		game.updateValidMoves(-1);
 		game.updateValidMoves(1);
+		game.printBoard();
 		System.out.print("White's move: ");
 		line = scanner.nextLine();
 		while (true) {
@@ -98,25 +99,39 @@ public class Chess {
 								}
 								promote = 'Q';
 							}
+							if (game.currMove == -1) {
+								//whiteKing.isInCheck = false;
+								
+							}
+							else {
+								//blackKing.isInCheck = false;
+							}
 							game.currMove *= -1;
 							game.printBoard();
 							/////// I wonder if this part is still needed
 							game.updateValidMoves(-game.currMove);
 							game.updateValidMoves(game.currMove);
 							game.disarmShields();
+							/*
 							if (game.currMove == -1) {
 								whiteKing.updateStatus(game.board);
 
 							}
 							else {
 								blackKing.updateStatus(game.board);
-							}
+							}*/
 							////////
 							//whiteKing.generateValidMoves(game.board);
 							//blackKing.generateValidMoves(game.board);
 							
 							
 							///// Stalemate or Checkmate 
+							King king2 = game.currMove==-1 ?  whiteKing : blackKing;
+							if (king2.isInCheck && !king2.hasValidMove && !game.protector()) {
+								String winner = game.currMove==-1? "Black" : "White" ;
+								System.out.println(winner+" wins");
+								return;
+							}
 							if (game.hasNoValidMoves() ) {
 								King king = game.currMove==-1 ?  whiteKing : blackKing;
 								if (!king.isInCheck) {

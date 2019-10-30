@@ -8,6 +8,13 @@ public class Rook extends Piece {
 		super(color,'R',x,y);
 	}
 	
+	public Piece copy() {
+		Rook temp = new Rook(this.color, this.xPos, this.yPos);
+		temp.validMoves = this.validMoves;
+		return this;
+	}
+
+	
 	public void path(Piece[][] board, int deltaX, int deltaY) {
 		int i = this.xPos + deltaX;
 		int j = this.yPos + deltaY;
