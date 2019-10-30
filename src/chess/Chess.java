@@ -25,11 +25,7 @@ public class Chess {
 		
 		
 		try {
-<<<<<<< HEAD
-			scanner = new Scanner(new File("Game3.txt"));
-=======
-			scanner = new Scanner(new File("Game2.txt"));
->>>>>>> 7dcd376e6ba8e8dd5610bc5958d0ae8ae5c43a73
+			scanner = new Scanner(new File("Game4.txt"));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -123,7 +119,7 @@ public class Chess {
 					if (piece!=null) {
 						int i = (int)(tokens[1].charAt(0)-97);
 						int j = (int)(8-(tokens[1].charAt(1)-48));
-						if (piece.move(game.board,i,j,piece.color)) {
+						if (piece.move(game.board,i,j,game.currMove)) {
 							if (piece.type == 'p' && ((piece.color == -1 && j == 0) || (piece.color == 1 && j == 7))) {
 								if (promote == 'Q') {
 									game.board[i][j] = new Queen(piece.color,i,j);
