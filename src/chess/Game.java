@@ -12,14 +12,14 @@ public class Game {
 		isDone = false;
 		currMove = -1;
 		board = new Piece[8][8];
-		board[3][1] = new Rook(1,3,1);
+		board[0][0] = new Rook(1,0,0);
 		board[1][0] = new Knight(1,1,0);
 		board[2][0] = new Bishop(1,2,0);
 		board[3][0] = new Queen(1,3,0);
 		board[4][0] = new King(1,4,0);
 		board[5][0] = new Bishop(1,5,0);
 		board[6][0] = new Knight(1,6,0);
-		board[5][1] = new Rook(1,5,1);
+		board[7][0] = new Rook(1,7,0);
 		board[0][7] = new Rook(-1,0,7);
 		board[1][7] = new Knight(-1,1,7);
 		board[2][7] = new Bishop(-1,2,7);
@@ -30,8 +30,8 @@ public class Game {
 		board[7][7] = new Rook(-1,7,7);
 
 		for (int i=0;i<8;i++) {
-			//board[i][1] = new Pawn(1,i,1);
-			//board[i][6] = new Pawn(-1,i,6);
+			board[i][1] = new Pawn(1,i,1);
+			board[i][6] = new Pawn(-1,i,6);
 		}
 		return;
 	}

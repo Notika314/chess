@@ -3,6 +3,8 @@
  * @author Christopher Taglieri cat197
  */
 package chess;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Chess {
@@ -20,7 +22,13 @@ public class Chess {
 	public static void main(String[] args) {
 		String line;
 		scanner = new Scanner(System.in);
-		
+		/*
+		try {
+			scanner = new Scanner(new File("Chess.txt"));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
 		Game game = new Game();
 		King whiteKing = (King)game.board[4][7];
 		King blackKing = (King)game.board[4][0];
@@ -100,12 +108,13 @@ public class Chess {
 								promote = 'Q';
 							}
 							if (game.currMove == -1) {
-								//whiteKing.isInCheck = false;
+								whiteKing.isInCheck = false;
 								
 							}
 							else {
-								//blackKing.isInCheck = false;
+								blackKing.isInCheck = false;
 							}
+
 							game.currMove *= -1;
 							game.printBoard();
 							/////// I wonder if this part is still needed

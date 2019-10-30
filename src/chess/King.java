@@ -169,7 +169,7 @@ public class King extends Piece {
 		this.validMoves = new int[8][8];
 		//System.out.println("Position is "+this.xPos+this.yPos+",checking "+this.xPos+ (this.yPos+this.color));
 		if ((this.yPos+(1)<8 && this.yPos+(1)>=0 )&& (board[this.xPos][this.yPos+1]==null 
-				|| board[this.xPos][this.yPos+1].color!=1)) {
+				|| board[this.xPos][this.yPos+1].color!=this.color)) {
 			Piece temp = board[this.xPos][this.yPos+1];
 			int i = this.xPos;
 			int j = this.yPos;
@@ -187,7 +187,7 @@ public class King extends Piece {
 		}
 		
 		if (this.yPos-(1)<8 && this.yPos-(1)>=0 && (board[this.xPos][this.yPos-1]==null 
-				|| board[this.xPos][this.yPos-1].color!=1)) {
+				|| board[this.xPos][this.yPos-1].color!=this.color)) {
 			Piece temp = board[this.xPos][this.yPos - 1];
 			int i = this.xPos;
 			int j = this.yPos;
@@ -205,7 +205,7 @@ public class King extends Piece {
 			board[this.xPos][this.yPos - 1] = temp;
 		}
 		if (this.xPos+1<8 && this.xPos+1>=0 && (board[this.xPos+1][this.yPos]==null 
-				|| board[this.xPos+1][this.yPos].color!=1)) {
+				|| board[this.xPos+1][this.yPos].color!=this.color)) {
 			Piece temp = board[this.xPos + 1][this.yPos];
 			int i = this.xPos;
 			int j = this.yPos;
@@ -224,7 +224,7 @@ public class King extends Piece {
 		
 		
 		if (this.xPos-1<8 && this.xPos-1>=0 && (board[this.xPos-1][this.yPos]==null 
-				|| board[this.xPos-1][this.yPos].color!=1)) {
+				|| board[this.xPos-1][this.yPos].color!=this.color)) {
 			//this.validMoves[this.xPos-1][this.yPos]=1;
 			Piece temp = board[this.xPos - 1][this.yPos];
 			int i = this.xPos;
@@ -243,7 +243,7 @@ public class King extends Piece {
 		}
 		
 		if (this.yPos+(1)<8 && this.yPos+1>=0 && (this.xPos+1)<8 && (this.xPos-1)>=0 && (board[this.xPos+1][this.yPos+1]==null 
-				|| board[this.xPos+1][this.yPos+1].color!=1)) {
+				|| board[this.xPos+1][this.yPos+1].color!=this.color)) {
 			//this.validMoves[this.xPos+1][this.yPos+1]=1;
 			Piece temp = board[this.xPos + 1][this.yPos+1];
 			int i = this.xPos;
@@ -263,7 +263,7 @@ public class King extends Piece {
 		}
 		
 		if (this.yPos+(1)<8 && this.yPos+1>=0 && (this.xPos-1)<8 && (this.xPos-1)>=0 && (board[this.xPos-1][this.yPos+1]==null 
-				|| board[this.xPos-1][this.yPos+1].color!=1)) {
+				|| board[this.xPos-1][this.yPos+1].color!=this.color)) {
 			//this.validMoves[this.xPos-1][this.yPos+1]=1;
 			Piece temp = board[this.xPos - 1][this.yPos+1];
 			int i = this.xPos;
@@ -284,7 +284,7 @@ public class King extends Piece {
 		
 		
 		if (this.yPos-(1)<8 && this.yPos-1>=0 && (this.xPos+1)<8 && (this.xPos+1)>=0 && (board[this.xPos+1][this.yPos-1]==null 
-				|| board[this.xPos+1][this.yPos-1].color!=1)) {
+				|| board[this.xPos+1][this.yPos-1].color!=this.color)) {
 			//this.validMoves[this.xPos+1][this.yPos-1]=1;
 			Piece temp = board[this.xPos + 1][this.yPos-1];
 			int i = this.xPos;
@@ -304,7 +304,7 @@ public class King extends Piece {
 		}
 		
 		if ((this.yPos-1)<8 && (this.yPos-1)>=0 && (this.xPos-1)<8 && (this.xPos-1)>=0 && (board[this.xPos-1][this.yPos-1]==null 
-				|| board[this.xPos-1][this.yPos-1].color!=1)) {
+				|| board[this.xPos-1][this.yPos-1].color!=this.color)) {
 			//this.validMoves[this.xPos-1][this.yPos-1]=1;
 			Piece temp = board[this.xPos - 1][this.yPos-1];
 			int i = this.xPos;

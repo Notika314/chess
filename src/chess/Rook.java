@@ -22,7 +22,7 @@ public class Rook extends Piece {
 			if (board[i][j] != null) {
 				if (board[i][j].color != this.color) {
 					shield(board, i, j, deltaX, deltaY);
-					this.validMoves[i][j] = 1;
+					this.validMoves[i][j] += 1;
 					this.hasValidMove = true;
 					if (board[i][j].type == 'K' && this.validMoves[i][j] == 1) {
 						flag();

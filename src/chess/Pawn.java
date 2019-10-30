@@ -71,7 +71,7 @@ public class Pawn extends Piece {
 			if ((this.yPos+(1*this.color) < 8 && this.yPos+(1*this.color) >= 0) 
 					&& this.xPos-1 >= 0 && board[this.xPos-1][this.yPos+(1*this.color)] != null
 					&& board[this.xPos-1][this.yPos+(1*this.color)].color != this.color &&
-					danger[0] == this.xPos+1 && danger[1] == this.yPos+(1*this.color)) {
+					danger[0] == this.xPos-1 && danger[1] == this.yPos+(1*this.color)) {
 				if (board[this.xPos-1][this.yPos+(1*this.color)].type == 'K') {
 					flag();
 					((King)board[this.xPos-1][this.yPos+(1*this.color)]).isInCheck = true;
