@@ -328,8 +328,11 @@ public class King extends Piece {
 			if ( board[this.xPos+3][this.yPos]!=null && board[this.xPos+3][this.yPos].type=='R' &&
 					!(board[this.xPos+3][this.yPos].hasMoved) ) {
 				boolean clear = true;
+				if (!(isSafeForSliding(this.xPos+1,this.yPos,board)) || !(isSafeForSliding(this.xPos+2,this.yPos,board))) {
+					clear =false;
+				}
 				for (int i=1;i<3;i++) {
-					if ( board[this.xPos+i][this.yPos]!=null || !(isSafeForSliding(this.xPos+i,this.yPos,board)) ) {
+					if ( board[this.xPos+i][this.yPos]!=null ) {
 						clear = false;
 					} 
 				}
@@ -338,8 +341,11 @@ public class King extends Piece {
 			if ( board[this.xPos-4][this.yPos]!=null && board[this.xPos-4][this.yPos].type=='R' &&
 					!(board[this.xPos-4][this.yPos].hasMoved) ) {
 				boolean clear = true;
+				if (!(isSafeForSliding(this.xPos-1,this.yPos,board)) || !(isSafeForSliding(this.xPos-2,this.yPos,board))) {
+					clear =false;
+				}
 				for (int i=1;i<4;i++) {
-					if ( board[this.xPos-i][this.yPos]!=null || !(isSafeForSliding(this.xPos-i,this.yPos,board)) ) {
+					if ( board[this.xPos-i][this.yPos]!=null) {
 						clear = false;
 					} 
 				}

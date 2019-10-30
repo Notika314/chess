@@ -22,19 +22,19 @@ public class Chess {
 	public static void main(String[] args) {
 		String line;
 		scanner = new Scanner(System.in);
-		/*
+//		
 		try {
 			scanner = new Scanner(new File("Chess.txt"));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}*/
+		}
 		Game game = new Game();
 		King whiteKing = (King)game.board[4][7];
 		King blackKing = (King)game.board[4][0];
 		boolean drawOffer = false;
 		char promote = 'Q';
-		game.printBoard();
+//		game.printBoard();
 		game.updateValidMoves(-1);
 		game.updateValidMoves(1);
 		game.printBoard();
@@ -116,6 +116,7 @@ public class Chess {
 							}
 
 							game.currMove *= -1;
+							
 							game.printBoard();
 							/////// I wonder if this part is still needed
 							game.updateValidMoves(-game.currMove);
@@ -144,7 +145,7 @@ public class Chess {
 							if (game.hasNoValidMoves() ) {
 								King king = game.currMove==-1 ?  whiteKing : blackKing;
 								if (!king.isInCheck) {
-									System.out.println("Draw by stalemate");
+									System.out.println("Stalemate");
 									return;
 								} else {
 									String winner = game.currMove==-1? "Black" : "White" ;

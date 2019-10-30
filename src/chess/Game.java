@@ -120,6 +120,7 @@ public class Game {
 	}
 	public void printBoard() {
 		System.out.println();
+		System.out.println();
 		for (int i=0;i<8;i++) {
 			for (int j=0;j<8;j++) {
 				if (board[j][i]==null) {
