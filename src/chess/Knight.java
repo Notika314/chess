@@ -133,7 +133,7 @@ public class Knight extends Piece {
 				(board[i+1][j-2] == null || board[i+1][j-2].color != this.color)) {
 			if (board[i+1][j-2] != null && board[i+1][j-2].type == 'K') {
 				flag();
-				((King)board[i+2][j+1]).isInCheck = true;
+				((King)board[i+1][j-2]).isInCheck = true;
 			}
 			this.hasValidMove = true;
 			this.validMoves[i+1][j-2] = 1;

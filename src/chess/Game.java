@@ -46,14 +46,16 @@ public class Game {
 		for (int i=0;i<8;i++) {
 			for (int j=0;j<8;j++) {
 				if (this.board[i][j]!=null && this.board[i][j].color==this.currMove) {
-					Piece piece = this.board[i][j];
-					for (int a=0;a<8;a++) {
+					if (this.board[i][j].hasValidMove) {
+						return false;
+					}
+					/*for (int a=0;a<8;a++) {
 						for (int b=0;b<8;b++) {
 							if (piece.validMoves[a][b]>0) {
 								return false;
 							}
 						}
-					}
+					}*/
 				}
 			}
 		}
@@ -68,6 +70,9 @@ public class Game {
 		}
 		else {
 			danger = Piece.bKingIsInDanger;
+		}
+		if (danger[0] == -1) {
+			return true;
 		}
 		for (int i=0;i<8;i++) {
 			for (int j=0;j<8;j++) {
@@ -87,7 +92,7 @@ public class Game {
 		int i,j;
 		for (i=0;i<8;i++) {
 			for (j=0;j<8;j++) {
-				if (board[j][i]!=null && board[j][i].color == color) {
+				if (board[j][i]!=null && board[j][i].color == color && board[j][i].type != 'K') {
 					//board[j][i].validMoves = new int[8][8];
 					//System.out.println("test"+board[j][i]+"\t"+j+"\t"+i);
 					board[j][i].generateValidMoves(board);

@@ -42,6 +42,7 @@ public class Chess {
 		line = scanner.nextLine();
 		while (true) {
 			String[] tokens = game.tokenizeInput(line);
+			//System.out.println(line);			
 			if (tokens.length < 1) {
 				System.out.println("Illegal move, try again");
 			}
@@ -120,20 +121,15 @@ public class Chess {
 							/////// I wonder if this part is still needed
 							game.updateValidMoves(-game.currMove);
 							game.updateValidMoves(game.currMove);
-							game.disarmShields();
-							/*
 							if (game.currMove == -1) {
-								whiteKing.updateStatus(game.board);
-
+								blackKing.generateValidMoves(game.board);
+								whiteKing.generateValidMoves(game.board);
 							}
 							else {
-								blackKing.updateStatus(game.board);
-							}*/
-							////////
-							//whiteKing.generateValidMoves(game.board);
-							//blackKing.generateValidMoves(game.board);
-							
-							
+								whiteKing.generateValidMoves(game.board);
+								blackKing.generateValidMoves(game.board);
+							}
+							game.disarmShields();
 							///// Stalemate or Checkmate 
 							King king2 = game.currMove==-1 ?  whiteKing : blackKing;
 							if (king2.isInCheck && !king2.hasValidMove && !game.protector()) {
@@ -144,21 +140,15 @@ public class Chess {
 							if (game.hasNoValidMoves() ) {
 								King king = game.currMove==-1 ?  whiteKing : blackKing;
 								if (!king.isInCheck) {
-									System.out.println("Draw by stalemate");
+									System.out.println("Stalemate");
 									return;
-								} else {
+								} 
+								else {
 									String winner = game.currMove==-1? "Black" : "White" ;
 									System.out.println(winner+" wins");
 									return;
 								}
-							///// Stalemate
-//							if (game.hasNoValidMoves()) {
-//								System.out.println("Stalemate");
-//								return;
-
 							}
-							//// end of Stalemate
-							
 							
 						}
 						else {

@@ -49,6 +49,7 @@ public class Pawn extends Piece {
 				this.validMoves[this.xPos][this.yPos+(2*this.color)] = 1;
 				this.hasValidMove = true;
 			}
+
 			if ((this.yPos+(1*this.color) < 8 && this.yPos+(1*this.color) >= 0) 
 					&& board[this.xPos][this.yPos+1*this.color] == null && 
 					board[danger[0]][danger[1]].validMoves[this.xPos][this.yPos+(2*this.color)] == 2) {
