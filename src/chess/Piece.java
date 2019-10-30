@@ -2,7 +2,7 @@ package chess;
 
 public abstract class Piece {
 	/**
-	 * 
+	 * Defines the Piece color;
 	 */
 	int color;
 	int xPos;
