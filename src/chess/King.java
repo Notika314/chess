@@ -5,7 +5,6 @@ import java.util.Arrays;
 public class King extends Piece {
 
 	boolean isInCheck;
-	boolean hasMoved;
 	
 	public King(int color, int x, int y) {
 		super(color,'K',x,y);
@@ -17,6 +16,7 @@ public class King extends Piece {
 	public Piece copy() {
 		King temp = new King(this.color, this.xPos, this.yPos);
 		temp.validMoves = this.validMoves;
+		temp.hasValidMove = this.hasValidMove;
 		temp.isInCheck = this.isInCheck;
 		temp.hasMoved = this.hasMoved;
 		return temp;

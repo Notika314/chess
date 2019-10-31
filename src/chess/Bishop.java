@@ -9,6 +9,7 @@ public class Bishop extends Piece {
 	public Piece copy() {
 		Bishop temp = new Bishop(this.color, this.xPos, this.yPos);
 		temp.validMoves = this.validMoves;
+		temp.hasValidMove = this.hasValidMove;
 		return temp;
 	}
 
@@ -80,7 +81,7 @@ public class Bishop extends Piece {
 		this.validMoves = new int[8][8];
 		int[] danger = danger(this.color);
 		if (danger[0] != -1) {
-			if (danger[2] != -1) {
+			if (danger[2] != -1 || this.kingShield != null) {
 				return;
 			}
 			pathUnderCheck(board,1,1);

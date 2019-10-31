@@ -9,6 +9,7 @@ public class Knight extends Piece {
 	public Piece copy() {
 		Knight temp = new Knight(this.color, this.xPos, this.yPos);
 		temp.validMoves = this.validMoves;
+		temp.hasValidMove = this.hasValidMove;
 		return temp;
 	}
 

@@ -9,6 +9,7 @@ public class Queen extends Piece {
 	public Piece copy() {
 		Queen temp = new Queen(this.color, this.xPos, this.yPos);
 		temp.validMoves = this.validMoves;
+		temp.hasValidMove = this.hasValidMove;
 		return temp;
 	}
 
@@ -41,7 +42,7 @@ public class Queen extends Piece {
 		int i = this.xPos + deltaX;
 		int j = this.yPos + deltaY;
 		while (i < 8 && i >= 0 && j < 8 && j >= 0) {
-			if (board[i][j] == null ) {
+			if (board[i][j] == null) {
 				if (this.color == -1) {
 					if (board[Piece.wKingIsInDanger[0]][Piece.wKingIsInDanger[1]].validMoves[i][j] == 2) {
 						this.validMoves[i][j] = 1;
@@ -80,7 +81,7 @@ public class Queen extends Piece {
 		this.validMoves = new int[8][8];
 		int[] danger = danger(this.color);
 		if (danger[0] != -1) {
-			if (danger[2] != -1) {
+			if (danger[2] != -1 || this.kingShield != null) {
 				return;
 			}
 			pathUnderCheck(board,1,1);

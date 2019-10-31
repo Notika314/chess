@@ -23,14 +23,18 @@ public class Chess {
 		String line;
 		scanner = new Scanner(System.in);
 		
-		
+		/*
 		try {
+<<<<<<< HEAD
 			scanner = new Scanner(new File("Stalemate.txt"));
+=======
+			scanner = new Scanner(new File("Stalemate2.txt"));
+>>>>>>> b3833b6e4d23974940dce18369e32220e7ab2ea9
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		*/
 		
 		Game game = new Game();
 		King whiteKing = (King)game.board[4][7];
@@ -40,6 +44,8 @@ public class Chess {
 //		game.printBoard();
 		game.updateValidMoves(-1);
 		game.updateValidMoves(1);
+		whiteKing.generateValidMoves(game.board);
+		blackKing.generateValidMoves(game.board);
 		game.printBoard();
 		System.out.print("White's move: ");
 		line = scanner.nextLine();
@@ -158,17 +164,6 @@ public class Chess {
 								blackKing.generateValidMoves(game.board);
 							}
 							game.disarmShields();
-							/*
-							if (game.board[1][0] != null) {
-								for (int l = 0; l<8; l++) {
-									for (int k = 0; k<8; k++) {
-										System.out.print(game.board[1][0].validMoves[k][l]+"\t");
-									}
-									System.out.println();
-								}
-								System.out.println(Piece.bKingIsInDanger[0] +""+Piece.bKingIsInDanger[1]);
-
-							}*/
 							///// Stalemate or Checkmate 
 							King king2 = game.currMove==-1 ?  whiteKing : blackKing;
 							if (king2.isInCheck && !king2.hasValidMove && !game.protector()) {

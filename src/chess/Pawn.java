@@ -2,7 +2,6 @@ package chess;
 
 public class Pawn extends Piece {
 
-	boolean hasMoved;
 	boolean passant;
 	
 	public Pawn(int color, int xPos, int yPos) {
@@ -12,6 +11,7 @@ public class Pawn extends Piece {
 	public Pawn copy() {
 		Pawn temp = new Pawn(this.color, this.xPos, this.yPos);
 		temp.validMoves = this.validMoves;
+		temp.hasValidMove = this.hasValidMove;
 		temp.hasMoved = this.hasMoved;
 		temp.passant = this.passant;
 		return temp;
@@ -48,7 +48,7 @@ public class Pawn extends Piece {
 		this.validMoves = new int[8][8];
 		int[] danger = danger(this.color);
 		if (danger[0] != -1) {
-			if (danger[2] != -1) {
+			if (danger[2] != -1 || this.kingShield != null) {
 				return;
 			}
 			if (hasMoved == false && board[this.xPos][this.yPos+1*this.color]==null 
