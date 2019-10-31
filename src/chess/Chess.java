@@ -23,18 +23,16 @@ public class Chess {
 		String line;
 		scanner = new Scanner(System.in);
 		
-		/*
-		try {
-<<<<<<< HEAD
-			scanner = new Scanner(new File("Stalemate.txt"));
-=======
-			scanner = new Scanner(new File("Stalemate2.txt"));
->>>>>>> b3833b6e4d23974940dce18369e32220e7ab2ea9
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		*/
+
+//		try {
+//
+//			scanner = new Scanner(new File("Game5.txt"));
+//
+//		} catch (FileNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	
 		
 		Game game = new Game();
 		King whiteKing = (King)game.board[4][7];
