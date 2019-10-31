@@ -1,3 +1,7 @@
+/**
+ * @author Natalia Bryzhatenko nb631
+ * @author Christopher Taglieri cat197
+ */
 package chess;
 
 public class Pawn extends Piece {
@@ -27,6 +31,12 @@ public class Pawn extends Piece {
 		if (this.validMoves[x][y] == 0) {
 			return false;
 		}
+		if (this.color == -1) {
+			Piece.wKingIsInDanger = new int[] {-1, -1, -1, -1};
+		}
+		else {
+			Piece.bKingIsInDanger = new int[] {-1, -1, -1, -1};
+		}
 		if (Math.abs(y-this.yPos) > 1) {
 			this.passant = true;
 		}
@@ -51,7 +61,7 @@ public class Pawn extends Piece {
 			if (danger[2] != -1 || this.kingShield != null) {
 				return;
 			}
-			if (hasMoved == false && board[this.xPos][this.yPos+1*this.color]==null 
+			if (this.hasMoved == false && board[this.xPos][this.yPos+1*this.color]==null 
 					&& board[this.xPos][this.yPos+2*this.color] == null &&
 					board[danger[0]][danger[1]].validMoves[this.xPos][this.yPos+(2*this.color)] == 2) {
 				this.validMoves[this.xPos][this.yPos+(2*this.color)] = 1;

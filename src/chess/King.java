@@ -1,3 +1,7 @@
+/**
+ * @author Natalia Bryzhatenko nb631
+ * @author Christopher Taglieri cat197
+ */
 package chess;
 
 import java.util.Arrays;

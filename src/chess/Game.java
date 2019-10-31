@@ -1,3 +1,7 @@
+/**
+ * @author Natalia Bryzhatenko nb631
+ * @author Christopher Taglieri cat197
+ */
 package chess;
 
 public class Game {
@@ -78,6 +82,9 @@ public class Game {
 			for (int j=0;j<8;j++) {
 				if (this.board[i][j]!=null && this.board[i][j].color==this.currMove) {
 					Piece piece = this.board[i][j];
+					if (piece.kingShield != null) {
+						continue;
+					}
 					if (piece.validMoves[danger[0]][danger[1]]>0) {
 						return true;
 					}
@@ -87,6 +94,33 @@ public class Game {
 		return false;
 	}
 	
+	public boolean blocker() {
+		int[] danger = null;
+		if (this.currMove == -1) {
+			danger = Piece.wKingIsInDanger;
+		}
+		else {
+			danger = Piece.bKingIsInDanger;
+		}
+		if (danger[0] == -1) {
+			return true;
+		}
+		for (int i=0;i<8;i++) {
+			for (int j=0;j<8;j++) {
+				if (this.board[i][j]!=null && this.board[i][j].color==this.currMove) {
+					Piece piece = this.board[i][j];
+					for (int k = 0; k < 8; k++) {
+						for (int l = 0; l < 8; l++) {
+							if (piece.validMoves[k][l] > 0 && this.board[danger[0]][danger[1]].validMoves[k][l] == 2) {
+								return true;
+							}
+						}
+					}
+				}
+			}
+		}
+		return false;
+	}
 	
 	public void updateValidMoves(int color) {
 		int i,j;

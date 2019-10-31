@@ -25,7 +25,7 @@ public class Chess {
 		
 		/*
 		try {
-			scanner = new Scanner(new File("Stalemate2.txt"));
+			scanner = new Scanner(new File("Stalemate.txt"));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -159,10 +159,9 @@ public class Chess {
 								whiteKing.generateValidMoves(game.board);
 								blackKing.generateValidMoves(game.board);
 							}
-							game.disarmShields();
 							///// Stalemate or Checkmate 
 							King king2 = game.currMove==-1 ?  whiteKing : blackKing;
-							if (king2.isInCheck && !king2.hasValidMove && !game.protector()) {
+							if (king2.isInCheck && !king2.hasValidMove && !game.protector() && !game.blocker()) {
 								System.out.println("Checkmate");
 								String winner = game.currMove==-1? "Black" : "White" ;
 								System.out.println(winner+" wins");
@@ -182,6 +181,8 @@ public class Chess {
 									return;
 								}
 							}
+							game.disarmShields();
+
 							
 						}
 						else {
