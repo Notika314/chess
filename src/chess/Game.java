@@ -1,19 +1,29 @@
-/**
+package chess;
+
+/** 
+ * This class has some general Game rules along with game states that
+ * are vital to the functioning of Chess.
  * @author Natalia Bryzhatenko nb631
  * @author Christopher Taglieri cat197
  */
-package chess;
-
 public class Game {
-	
-	
+	/**
+	 * Defines the game board, made up of all Pieces on the board at
+	 * any time in an 8 by 8 array.
+	 */
 	public Piece[][] board;
-	boolean isDone;
-	int winner; /* 0 for no winner, -1 - for white ,1 -for black */
-	int currMove; /*flag to indicate whose turn to move -1 for white, 1 for black*/
+	
+	/**
+	 * Defines which player has the current turn. Is set
+	 * to -1 for white and 1 for black.
+	 */
+	int currMove;
+	
+	/**
+	 * Constructs the game board and fills in all Pieces that would
+	 * be at the start of your typical Chess game.
+	 */
 	public Game() {
-		winner = 0;
-		isDone = false;
 		currMove = -1;
 		board = new Piece[8][8];
 		board[0][0] = new Rook(1,0,0);
@@ -32,20 +42,28 @@ public class Game {
 		board[5][7] = new Bishop(-1,5,7);
 		board[6][7] = new Knight(-1,6,7);
 		board[7][7] = new Rook(-1,7,7);
-
 		for (int i=0;i<8;i++) {
 			board[i][1] = new Pawn(1,i,1);
 			board[i][6] = new Pawn(-1,i,6);
 		}
 		return;
 	}
+	
+	/**
+	 * Splits up input from the user into tokens so that their instructions
+	 * can be parsed into what move they wish to take.
+	 * @param input The string that is received from the Scanner.
+	 * @return Each part of the string split by its white space.
+	 */
 	public String[] tokenizeInput(String input) {
 		String[] tokens = input.split("\\s+");
 		return tokens;
 	}
 	
-	
-	///// Stalemate
+	/**
+	 * One of the methods used to determine a stalemate.
+	 * @return True if no Piece on the board has a valid move, or False if at least one does.
+	 */
 	public boolean hasNoValidMoves() {
 		for (int i=0;i<8;i++) {
 			for (int j=0;j<8;j++) {
@@ -53,20 +71,17 @@ public class Game {
 					if (this.board[i][j].hasValidMove) {
 						return false;
 					}
-					/*for (int a=0;a<8;a++) {
-						for (int b=0;b<8;b++) {
-							if (piece.validMoves[a][b]>0) {
-								return false;
-							}
-						}
-					}*/
 				}
 			}
 		}
 		return true;
 	}
-	///// End of Stalemate
-	
+
+	/**
+	 * Method used to check if there is a unit on your side that
+	 * can defeat a Piece that has your King in check.
+	 * @return True if there is some unit, false if otherwise.
+	 */
 	public boolean protector() {
 		int[] danger = null;
 		if (this.currMove == -1) {
@@ -94,6 +109,11 @@ public class Game {
 		return false;
 	}
 	
+	/**
+	 * Method used to check if there is a unit on your side that
+	 * can block a Piece that has your King in check.
+	 * @return True if there is some unit, false if otherwise.
+	 */
 	public boolean blocker() {
 		int[] danger = null;
 		if (this.currMove == -1) {
@@ -122,13 +142,15 @@ public class Game {
 		return false;
 	}
 	
+	/**
+	 * Iterates through the board and generates valid moves according to a color.
+	 * @param color Color that we wish to update.
+	 */
 	public void updateValidMoves(int color) {
 		int i,j;
 		for (i=0;i<8;i++) {
 			for (j=0;j<8;j++) {
 				if (board[j][i]!=null && board[j][i].color == color && board[j][i].type != 'K') {
-					//board[j][i].validMoves = new int[8][8];
-					//System.out.println("test"+board[j][i]+"\t"+j+"\t"+i);
 					board[j][i].generateValidMoves(board);
 				}
 			}
@@ -136,13 +158,15 @@ public class Game {
 		return;
 	}
 	
+	/**
+	 * Clear the passant flag from units that have no longer need of it.
+	 * @param color Color that we wish to update.
+	 */
 	public void clearPassant(int color) {
 		int i,j;
 		for (i=0;i<8;i++) {
 			for (j=0;j<8;j++) {
 				if (board[j][i]!=null && board[j][i].color == color && board[j][i].type == 'p') {
-					//board[j][i].validMoves = new int[8][8];
-					//System.out.println("test"+board[j][i]+"\t"+j+"\t"+i);
 					((Pawn)board[j][i]).passant = false;
 				}
 			}
@@ -150,6 +174,10 @@ public class Game {
 		return;
 	}
 	
+	/**
+	 * Removes the shield from each Piece so that, if needed, it is 
+	 * generated in a proper way on next turn.
+	 */
 	public void disarmShields() {
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
@@ -160,17 +188,26 @@ public class Game {
 		}
 	}
 	
+	/**
+	 * Finds and returns the Piece on the Board given a certain
+	 * input from the user.
+	 * @param token The instruction that the user input.
+	 * @return The Piece that is occupying that slot (or null).
+	 */
 	public Piece findPiece(String token) {
 		Piece piece; 
 		int i = (int)(token.charAt(0)-97);
 		int j = (int)(8-(token.charAt(1)-48));
-//		System.out.println("i is "+ i+ ", j is "+j);
 		if (i>7 || j>7) {
 			return null;
 		}
 		piece = board[i][j];
 		return piece;
 	}
+	
+	/**
+	 * Prints the game Board as needed to understand how Chess operates.
+	 */
 	public void printBoard() {
 		System.out.println();
 		System.out.println();

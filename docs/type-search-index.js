@@ -1,1 +1,1 @@
-typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"chess","l":"Chess"}]
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"chess","l":"Bishop"},{"p":"chess","l":"Chess"},{"p":"chess","l":"Game"},{"p":"chess","l":"King"},{"p":"chess","l":"Knight"},{"p":"chess","l":"Pawn"},{"p":"chess","l":"Piece"},{"p":"chess","l":"Queen"},{"p":"chess","l":"Rook"}]

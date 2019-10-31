@@ -1,22 +1,35 @@
-/**
- * @author Natalia Bryzhatenko nb631
- * @author Christopher Taglieri cat197
- */
 package chess;
 
 import java.util.Arrays;
 
+/**
+ * This class implements the logic that governs how a King
+ * operates in a game of chess.
+ * @author Natalia Bryzhatenko nb631
+ * @author Christopher Taglieri cat197
+ */
 public class King extends Piece {
-
+	/**
+	 * Defines whether the King is in check or not.
+	 */
 	boolean isInCheck;
 	
+	/**
+	 * Initializes a King with given color and position.
+	 * @param color Color
+	 * @param x X Position
+	 * @param y Y Position
+	 */
 	public King(int color, int x, int y) {
 		super(color,'K',x,y);
 		isInCheck = false;
 	}
 	
-	
-	
+	/**
+	 * Implementation of super class abstract method. Creates
+	 * a copy of the King and returns the duplicate.
+	 * @return A Copied Piece dynamically bound as King.
+	 */
 	public Piece copy() {
 		King temp = new King(this.color, this.xPos, this.yPos);
 		temp.validMoves = this.validMoves;
@@ -26,7 +39,14 @@ public class King extends Piece {
 		return temp;
 	}
 
-	
+	/**
+	 * Move method specific to how the King operates when they move given their special move set.
+	 * @param board The game board with all current available pieces located on it.
+	 * @param x The x position on the board you wish to move to on your turn;
+	 * @param y The y position on the board you wish to move to on your turn;
+	 * @param color The color that is attempting to move, ensures strict order is adhered to in chess.
+	 * @return True if move is valid and no parameters are wrong, False if something prevents the move from legally occurring
+	 */
 	public boolean move(Piece board[][], int x, int y, int color) {
 		if (this.color != color) {
 			return false;
@@ -54,7 +74,7 @@ public class King extends Piece {
 			this.yPos = y;
 			board[x][y] = this;
 			board[i][j] = null;
-		} else if (this.validMoves[x][y]==2) {	//if trying to castle 
+		} else if (this.validMoves[x][y]==2) { 
 			if (x==6) {
 				Rook theRook = (Rook)board[7][y];
 				int lastX = this.xPos;
@@ -88,17 +108,20 @@ public class King extends Piece {
 		return true;
 	}
 	
+	/**
+	 * Helper method used to ensure that castling is a valid more for the king.
+	 * @param x X position on the board that is being checked for safety.
+	 * @param y Y position on the board that is being checked for safety.
+	 * @param board The game board with all current available pieces located on it.
+	 * @return True if the area where the castling would occur is free of harm, false if otherwise.
+	 */
 	private boolean isSafeForSliding(int x, int y,Piece[][] board) {
 		for (int i=0;i<8;i++) {
 			for (int j=0;j<8;j++) {
 				if (board[i][j]!=null && board[i][j].color!=this.color) {
 					Piece opponent = board[i][j];
-					for (int k=0;k<8;k++) {
-						for (int l=0;l<8;l++) {
-							if (k==x && l==y && opponent.validMoves[k][l]>0) {
-								return false;
-							}
-						}
+					if (opponent.validMoves[x][y]>0) {
+						return false;
 					}
 				}
 			}
@@ -106,23 +129,12 @@ public class King extends Piece {
 		return true;
 	}
 	
-//	private void checkValidMovesForSafety(Piece[][] board) {
-//		for (int i=0;i<0;i++) {
-//			for (int j=0;j<0;j++) {
-//				if (board[i][j]!=null && board[i][j].color!=this.color) {
-//					Piece opponent = board[i][j];
-//					for (int k=0;k<8;k++) {
-//						for (int l=0;l<8;l++) {
-//							if (opponent.validMoves[k][l]>0) {
-//								this.validMoves[k][l]=0;
-//							}
-//						}
-//					}
-//				}
-//			}
-//		}
-//	}
-	
+	/**
+	 * Simulates what would happen if the King moved to a new square. Used to make sure the
+	 * King does not move himself into a checked position.
+	 * @param board The game board with all current available pieces located on it.
+	 * @return True if King can move to this position without being endangered, false if otherwise.
+	 */
 	public boolean updateStatus(Piece[][] board) {
 		int[] tempDanger = new int[4];
 		if (this.color == -1) {
@@ -130,15 +142,11 @@ public class King extends Piece {
 		} 
 		else {
 			tempDanger = Arrays.copyOf(Piece.bKingIsInDanger, 4);
-			;
 		}
 		for (int i=0;i<8;i++) {
 			for (int j=0;j<8;j++) {
-//				System.out.println("i is "+i+" j is "+j);
 				if (board[i][j]!=null && board[i][j].color!=this.color ) {
 					Piece opponent = board[i][j].copy();
-					//System.out.println(opponent.type);
-					//int [][] tempMoves = opponent.validMoves;
 					if (opponent.type!='K') {
 						opponent.generateValidMoves(board);
 					}
@@ -149,27 +157,25 @@ public class King extends Piece {
 						Piece.bKingIsInDanger = Arrays.copyOf(tempDanger, 4);
 					}
 					if (opponent.validMoves[this.xPos][this.yPos]>0) {
-						//this.isInCheck=true;
-						//board[i][j].validMoves = tempMoves;
 						return false;
 					}
-					//board[i][j].validMoves = tempMoves;
 				}
 			}
 		}
 		return true;
 	}
 	
+	/**
+	 * The logic for how a Pawn generates the legal moves available to it. Starts
+	 * with flags set to false and a clear board that is only populated and set to 
+	 * true if there is some available move allowed. All moves generated are legal
+	 * and do not require further pruning.
+	 * @param board The game board with all current available pieces located on it.
+	 */
 	public void generateValidMoves(Piece board[][]) {
-//		if (this.isInCheck) System.out.println("The "+this.color+ " is in check");
-//		else System.out.println("The "+this.color+ " king is NOT in check");
-		//System.out.println("generating valid moves for "+this.type+this.color);
 		this.hasValidMove = false;
 		this.validMoves = new int[8][8];
-		
 		boolean tempCheck = this.isInCheck;
-
-		//System.out.println("Position is "+this.xPos+this.yPos+",checking "+this.xPos+ (this.yPos+this.color));
 		if ((this.yPos+(1)<8 && this.yPos+(1)>=0 )&& (board[this.xPos][this.yPos+1]==null 
 				|| board[this.xPos][this.yPos+1].color!=this.color)) {
 			Piece temp = board[this.xPos][this.yPos+1];
@@ -186,14 +192,12 @@ public class King extends Piece {
 			this.xPos=i;
 			this.yPos = j;
 			board[this.xPos][this.yPos+1]=temp;
-		}
-		
+		}	
 		if (this.yPos-(1)<8 && this.yPos-(1)>=0 && (board[this.xPos][this.yPos-1]==null 
 				|| board[this.xPos][this.yPos-1].color!=this.color)) {
 			Piece temp = board[this.xPos][this.yPos - 1];
 			int i = this.xPos;
 			int j = this.yPos;
-
 			this.yPos = this.yPos - 1;
 			board[this.xPos][this.yPos] = this;
 			board[i][j] = null;
@@ -223,11 +227,8 @@ public class King extends Piece {
 			this.yPos = j;
 			board[this.xPos + 1][this.yPos] = temp;
 		}
-		
-		
 		if (this.xPos-1<8 && this.xPos-1>=0 && (board[this.xPos-1][this.yPos]==null 
 				|| board[this.xPos-1][this.yPos].color!=this.color)) {
-			//this.validMoves[this.xPos-1][this.yPos]=1;
 			Piece temp = board[this.xPos - 1][this.yPos];
 			int i = this.xPos;
 			int j = this.yPos;
@@ -243,10 +244,8 @@ public class King extends Piece {
 			this.yPos = j;
 			board[this.xPos - 1][this.yPos] = temp;
 		}
-		
 		if (this.yPos+(1)<8 && this.yPos+1>=0 && (this.xPos+1)<8 && (this.xPos-1)>=0 && (board[this.xPos+1][this.yPos+1]==null 
 				|| board[this.xPos+1][this.yPos+1].color!=this.color)) {
-			//this.validMoves[this.xPos+1][this.yPos+1]=1;
 			Piece temp = board[this.xPos + 1][this.yPos+1];
 			int i = this.xPos;
 			int j = this.yPos;
@@ -263,10 +262,8 @@ public class King extends Piece {
 			this.yPos = j;
 			board[this.xPos + 1][this.yPos+1] = temp;
 		}
-		
 		if (this.yPos+(1)<8 && this.yPos+1>=0 && (this.xPos-1)<8 && (this.xPos-1)>=0 && (board[this.xPos-1][this.yPos+1]==null 
 				|| board[this.xPos-1][this.yPos+1].color!=this.color)) {
-			//this.validMoves[this.xPos-1][this.yPos+1]=1;
 			Piece temp = board[this.xPos - 1][this.yPos+1];
 			int i = this.xPos;
 			int j = this.yPos;
@@ -283,11 +280,8 @@ public class King extends Piece {
 			this.yPos = j;
 			board[this.xPos - 1][this.yPos+1] = temp;
 		}
-		
-		
 		if (this.yPos-(1)<8 && this.yPos-1>=0 && (this.xPos+1)<8 && (this.xPos+1)>=0 && (board[this.xPos+1][this.yPos-1]==null 
 				|| board[this.xPos+1][this.yPos-1].color!=this.color)) {
-			//this.validMoves[this.xPos+1][this.yPos-1]=1;
 			Piece temp = board[this.xPos + 1][this.yPos-1];
 			int i = this.xPos;
 			int j = this.yPos;
@@ -304,10 +298,8 @@ public class King extends Piece {
 			this.yPos = j;
 			board[this.xPos + 1][this.yPos-1] = temp;
 		}
-		
 		if ((this.yPos-1)<8 && (this.yPos-1)>=0 && (this.xPos-1)<8 && (this.xPos-1)>=0 && (board[this.xPos-1][this.yPos-1]==null 
 				|| board[this.xPos-1][this.yPos-1].color!=this.color)) {
-			//this.validMoves[this.xPos-1][this.yPos-1]=1;
 			Piece temp = board[this.xPos - 1][this.yPos-1];
 			int i = this.xPos;
 			int j = this.yPos;
@@ -324,11 +316,7 @@ public class King extends Piece {
 			this.yPos = j;
 			board[this.xPos - 1][this.yPos-1] = temp;
 		}
-		
 		this.isInCheck = tempCheck;
-		
-		
-		//adding validMoves for castling here:
 		if (!this.isInCheck && !this.hasMoved) {
 			if ( board[this.xPos+3][this.yPos]!=null && board[this.xPos+3][this.yPos].type=='R' &&
 					!(board[this.xPos+3][this.yPos].hasMoved) ) {
@@ -357,8 +345,5 @@ public class King extends Piece {
 				if (clear) this.validMoves[this.xPos-2][this.yPos] = 2;
 			}
 		} 
-
-//		checkValidMovesForSafety(board);		
-	}
-	
+	}	
 }

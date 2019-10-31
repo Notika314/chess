@@ -1,15 +1,27 @@
+package chess;
+
 /**
+ * This class implements the logic that governs how a Queen
+ * operates in a game of chess.
  * @author Natalia Bryzhatenko nb631
  * @author Christopher Taglieri cat197
  */
-package chess;
-
 public class Queen extends Piece {
-
+	/**
+	 * Initializes a Queen with given color and position.
+	 * @param color Color
+	 * @param x X Position
+	 * @param y Y Position
+	 */
 	public Queen(int color, int x, int y) {
 		super(color,'Q',x,y);
 	}
 	
+	/**
+	 * Implementation of super class abstract method. Creates
+	 * a copy of the Queen and returns the duplicate.
+	 * @return A Copied Piece dynamically bound as Queen.
+	 */
 	public Piece copy() {
 		Queen temp = new Queen(this.color, this.xPos, this.yPos);
 		temp.validMoves = this.validMoves;
@@ -17,7 +29,13 @@ public class Queen extends Piece {
 		return temp;
 	}
 
-	
+	/**
+	 * Generates valid moves in a line of attack as defined by generateValidMoves.
+	 * Also checks to ensure the piece is not shielding the King from check.
+	 * @param board The game board with all current available pieces located on it.
+	 * @param deltaX How much that piece changes in the x direction on its path.
+	 * @param deltaY How much that piece changes in the y direction on its path.
+	 */
 	public void path(Piece[][] board, int deltaX, int deltaY) {
 		int i = this.xPos + deltaX;
 		int j = this.yPos + deltaY;
@@ -42,6 +60,14 @@ public class Queen extends Piece {
 		}
 	}
 	
+	/**
+	 * Modified version of path when under the added constraint that the King of 
+	 * this current color is under check. Only generates the parts of the path that would
+	 * ensure the survival of the King.
+	 * @param board The game board with all current available pieces located on it.
+	 * @param deltaX How much that piece changes in the x direction on its path.
+	 * @param deltaY How much that piece changes in the y direction on its path.
+	 */
 	public void pathUnderCheck(Piece[][] board, int deltaX, int deltaY) {
 		int i = this.xPos + deltaX;
 		int j = this.yPos + deltaY;
@@ -80,6 +106,13 @@ public class Queen extends Piece {
 		}
 	}
 	
+	/**
+	 * The logic for how a Queen generates the legal moves available to it. Starts
+	 * with flags set to false and a clear board that is only populated and set to 
+	 * true if there is some available move allowed. All moves generated are legal
+	 * and do not require further pruning.
+	 * @param board The game board with all current available pieces located on it.
+	 */
 	public void generateValidMoves(Piece board[][]) {
 		this.hasValidMove = false;
 		this.validMoves = new int[8][8];
@@ -133,6 +166,5 @@ public class Queen extends Piece {
 		path(board,-1,0);
 		path(board,0,1);
 		path(board,0,-1);
-	}
-	
+	}	
 }

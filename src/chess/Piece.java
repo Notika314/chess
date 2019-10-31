@@ -1,6 +1,7 @@
 package chess;
 
-/**This abstract class is the parent class to all the other
+/**
+ * This abstract class is the parent class to all the other
  * pieces. It allows us to execute some common functionality. It
  * has two abstract methods, copy and generateValidMoves, along
  * with the move, danger, flag, shield, and toString methods.
@@ -10,7 +11,7 @@ package chess;
  */
 public abstract class Piece {
 	/**
-	 * Defines color of the Piece;
+	 * Defines color of the Piece.
 	 */
 	int color;
 	
@@ -106,7 +107,7 @@ public abstract class Piece {
 	 * @param x The x position on the board you wish to move to on your turn;
 	 * @param y The y position on the board you wish to move to on your turn;
 	 * @param color The color that is attempting to move, ensures strict order is adhered to in chess.
-	 * @return True if move is valid and no parameters are wrong, False if something prevents the move from legally occuring.
+	 * @return True if move is valid and no parameters are wrong, False if something prevents the move from legally occurring.
 	 */
 	public boolean move(Piece board[][], int x, int y, int color) {
 		if (this.color != color) {
@@ -180,8 +181,8 @@ public abstract class Piece {
 	 * @param board The game board with all current available pieces located on it.
 	 * @param x The initial x position of the shielding Piece.
 	 * @param y The initial y position of the shielding Piece.
-	 * @param deltaX
-	 * @param deltaY
+	 * @param deltaX How much that piece changes in the x direction on its path.
+	 * @param deltaY How much that piece changes in the y direction on its path.
 	 */
 	public void shield(Piece[][] board, int x, int y, int deltaX, int deltaY) {
 		int i = x, j = y;
@@ -201,11 +202,13 @@ public abstract class Piece {
 		}
 	}
 	
+	/**
+	 * Simple toString implementation so that Piece appears on board.
+	 */
 	public String toString() {
 		if (color == 1) { 
 			return "b" + this.type;
 		}
 		return "w" + this.type;
-	}
-	
+	}	
 }

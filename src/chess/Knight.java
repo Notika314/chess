@@ -1,15 +1,27 @@
+package chess;
+
 /**
+ * This class implements the logic that governs how a Knight
+ * operates in a game of chess.
  * @author Natalia Bryzhatenko nb631
  * @author Christopher Taglieri cat197
  */
-package chess;
-
 public class Knight extends Piece {
-
+	/**
+	 * Initializes a Knight with given color and position.
+	 * @param color Color
+	 * @param x X Position
+	 * @param y Y Position
+	 */
 	public Knight(int color, int x, int y) {
 		super(color,'N',x,y);
 	}
 	
+	/**
+	 * Implementation of super class abstract method. Creates
+	 * a copy of the Knight and returns the duplicate.
+	 * @return A Copied Piece dynamically bound as Knight.
+	 */
 	public Piece copy() {
 		Knight temp = new Knight(this.color, this.xPos, this.yPos);
 		temp.validMoves = this.validMoves;
@@ -17,7 +29,13 @@ public class Knight extends Piece {
 		return temp;
 	}
 
-	
+	/**
+	 * The logic for how a Knight generates the legal moves available to it. Starts
+	 * with flags set to false and a clear board that is only populated and set to 
+	 * true if there is some available move allowed. All moves generated are legal
+	 * and do not require further pruning.
+	 * @param board The game board with all current available pieces located on it.
+	 */
 	public void generateValidMoves(Piece board[][]) {
 		this.hasValidMove = false;
 		this.validMoves = new int[8][8];
@@ -154,5 +172,4 @@ public class Knight extends Piece {
 			this.validMoves[i+2][j-1] = 1;
 		}
 	}
-	
 }
