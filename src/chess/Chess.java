@@ -25,7 +25,7 @@ public class Chess {
 		
 		
 		try {
-			scanner = new Scanner(new File("Game4.txt"));
+			scanner = new Scanner(new File("Stalemate.txt"));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
