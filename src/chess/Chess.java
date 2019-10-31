@@ -31,7 +31,7 @@ public class Chess {
 			e.printStackTrace();
 		}
 		*/
-		
+	
 		Game game = new Game();
 		King whiteKing = (King)game.board[4][7];
 		King blackKing = (King)game.board[4][0];
